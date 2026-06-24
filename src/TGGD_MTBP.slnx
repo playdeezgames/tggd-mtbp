@@ -1,28 +1,28 @@
 <Solution>
   <Folder Name="/01_Provision/">
-    <Project Path="BROS.Provision/BROS.Provision.vbproj" Id="db46e9d6-6612-45d3-8f6d-90e74ee389d1" />
+    <Project Path="MTBP.Provision/MTBP.Provision.vbproj" Id="4ecf97d4-474d-44f6-820c-bb4af14e96ad" />
     <Project Path="TGGD.Provision/TGGD.Provision.vbproj" Id="9ee01a7a-3b3d-481f-8185-175ce81b9fe9" />
   </Folder>
   <Folder Name="/02_Persistence/">
-    <Project Path="BROS.Persistence/BROS.Persistence.vbproj" Id="60303add-64cc-4dbd-8769-295bb55696b0" />
+    <Project Path="MTBP.Persistence/MTBP.Persistence.vbproj" Id="caff3b61-c869-43d9-8c61-4c64b5132154" />
     <Project Path="TGGD.Persistence/TGGD.Persistence.vbproj" Id="89c4e140-ebfe-40da-9386-fbabd333040b" />
   </Folder>
   <Folder Name="/03_Processing/">
-    <Project Path="BROS.Processing/BROS.Processing.vbproj" Id="65d9e378-72a1-414f-8ca5-2683e473f059" />
+    <Project Path="MTBP.Processing/MTBP.Processing.vbproj" Id="ff578258-25b8-4c68-8bc6-02cc4149bf54" />
     <Project Path="TGGD.Processing/TGGD.Processing.vbproj" Id="83b62062-917b-4da5-b1c7-0aeaae17254d" />
   </Folder>
   <Folder Name="/04_Presentation/">
-    <Project Path="BROS.Presentation/BROS.Presentation.vbproj" Id="0e9e650e-0f4c-4f0a-9208-8efb5e414cba" />
+    <Project Path="MTBP.Presentation/MTBP.Presentation.vbproj" Id="677ea23a-58a8-433a-884d-09ab475ef442" />
     <Project Path="TGGD.Presentation/TGGD.Presentation.vbproj" Id="057e3ef3-f5ee-470b-a0e5-528e52ee207c" />
   </Folder>
   <Folder Name="/05_Platform/">
-    <Project Path="BROS.Platform/BROS.Platform.vbproj" Id="3f9a05b2-9fcb-456a-a688-b8d23ddba88e" />
+    <Project Path="MTBP.Platform/MTBP.Platform.vbproj" Id="4bffb804-700b-4a4f-89b5-7e1bdef79ed3" />
     <Project Path="TGGD.Platform/TGGD.Platform.vbproj" Id="c9ee3578-1289-4864-ad74-6570b8d71b59" />
   </Folder>
   <Folder Name="/_STUFF/">
     <File Path="../README.md" />
     <File Path="../shippit.sh" />
   </Folder>
-  <Project Path="BROS.Blazor/BROS.Blazor.csproj" Id="7ccf0d40-865e-411c-830a-7dcd51edf7a8" />
-  <Project Path="BROS.Spectre/BROS.Spectre.vbproj" Id="03e3aca2-2f67-4cde-9b96-f54cd88812c5" />
+  <Project Path="MTBP.Blazor/MTBP.Blazor.csproj" Id="574973f2-67b5-46a0-86a1-38fabf8494d3" />
+  <Project Path="MTBP.Spectre/MTBP.Spectre.vbproj" Id="548333ea-5561-47d3-ad4c-f0ff3485380f" />
 </Solution>
