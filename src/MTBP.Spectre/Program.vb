@@ -6,7 +6,7 @@ Imports TGGD.Presentation
 
 Module Program
     Sub Main(args As String())
-        Console.Title = "TODO: Game Title"
+        Console.Title = "Toxic City of SPLORR!!"
         Dim display As IDisplay = MTBPDisplay.Create(True, New Persister).Result
         While display.Running
             AnsiConsole.Clear()

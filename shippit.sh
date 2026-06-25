@@ -10,7 +10,7 @@ rm -f ./pub-linux/*.pdb
 rm -f ./pub-windows/*.pdb
 rm -f ./pub-mac/*.pdb
 rm -f ./pub-html/*.pdb
-butler push pub-windows thegrumpygamedev/tggd-mtbp:windows
-butler push pub-linux thegrumpygamedev/tggd-mtbp:linux
-butler push pub-mac thegrumpygamedev/tggd-mtbp:mac
-butler push pub-html/wwwroot thegrumpygamedev/tggd-mtbp:html
+butler push pub-windows thegrumpygamedev/toxic-city-of-splorr:windows
+butler push pub-linux thegrumpygamedev/toxic-city-of-splorr:linux
+butler push pub-mac thegrumpygamedev/toxic-city-of-splorr:mac
+butler push pub-html/wwwroot thegrumpygamedev/toxic-city-of-splorr:html

@@ -10,7 +10,7 @@ Public Class TitleDialog
     End Sub
 
     Public Overrides Function Run() As IDialogPrompt
-        Context.Render("TODO: Game Title")
+        Context.Render("Toxic City of SPLORR!!")
         Return DialogPrompt.CreateChoicePrompt("", DialogChoice.Create(True, "OK", AddressOf Relaunch))
     End Function
 
