@@ -2,27 +2,34 @@
 Imports TGGD.Presentation
 
 Friend Class NavigationDialog
-    Inherits ExitableModelDialog(Of IDisplayContext, IWorldModel)
+    Inherits LauncherModelDialog
 
     Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog))
-        MyBase.New(context, model, exitDialog)
+        MyBase.New(context, model, exitDialog, "Now What?")
     End Sub
 
-    Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
-        Return Function() New NavigationDialog(context, model, exitDialog)
+    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of Func(Of IDisplayContext, IWorldModel, Func(Of IDialog), IDialogChoice))
+        Get
+            Return {
+                    AddressOf ChooseMoveMenu,
+                    AddressOf ChooseGameMenu
+                }
+        End Get
+    End Property
+
+    Private Shared Function ChooseMoveMenu(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog)) As IDialogChoice
+        Return DialogChoice.Create(model.CanMove, "Move...", MoveMenuDialog.Launch(context, model, exitDialog))
     End Function
 
-    Public Overrides Function Run() As IDialogPrompt
-        For Each message In Model.Messages
-            Context.Render(message)
-        Next
-        'TODO: choices come from model!
-        Return DialogPrompt.CreateChoicePrompt(
-            "Now What?",
-            DialogChoice.Create(True, "Game Menu", GameMenuDialog.Launch(Context, Model, ExitDialog)))
+    Private Shared Function ChooseGameMenu(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog)) As IDialogChoice
+        Return DialogChoice.Create(True, "Game Menu", GameMenuDialog.Launch(context, model, exitDialog))
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
         Return New NavigationDialog(Context, Model, ExitDialog)
+    End Function
+
+    Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
+        Return Function() New NavigationDialog(context, model, exitDialog)
     End Function
 End Class

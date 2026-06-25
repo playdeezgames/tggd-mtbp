@@ -22,6 +22,12 @@ Public Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property CanMove As Boolean Implements IWorldModel.CanMove
+        Get
+            Return True
+        End Get
+    End Property
+
     Public Sub Embark() Implements IWorldModel.Embark
         Abandon()
         Entity.Initialize(InitializationContext.Create())
