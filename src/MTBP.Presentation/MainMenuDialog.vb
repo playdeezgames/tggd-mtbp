@@ -15,7 +15,7 @@ Friend Class MainMenuDialog
     Public Overrides Function Run() As IDialogPrompt
         Return DialogPrompt.CreateChoicePrompt(
             "Main Menu:",
-            DialogChoice.Create(True, "Embark!", AddressOf Relaunch),
+            DialogChoice.Create(True, "Embark!", EmbarkDialog.Launch(Context, Model, ExitDialog)),
             DialogChoice.Create(Model.IsQuittable, "Quit", ConfirmDialog(Of IDisplayContext).Launch(Context, "Are you sure you want to quit?", ExitDialog, AddressOf Relaunch)))
     End Function
 

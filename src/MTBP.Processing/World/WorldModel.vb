@@ -16,16 +16,28 @@ Public Class WorldModel
         End Get
     End Property
 
+    Public Sub Embark() Implements IWorldModel.Embark
+        Abandon()
+    End Sub
+
+    Public Sub Abandon() Implements IWorldModel.Abandon
+        Dim quittable = IsQuittable
+        Entity.Clear()
+        If quittable Then
+            Entity.SetTag(Tags.QUITTABLE)
+        End If
+    End Sub
+
     Public Shared Async Function Create(quittable As Boolean, persister As IPersister) As Task(Of IWorldModel)
-        Dim world As IWorld
+        Dim entity As IWorld
         Try
-            world = Await MTBP.Persistence.World.Load(SAVE_FILE_NAME, persister)
+            entity = Await MTBP.Persistence.World.Load(SAVE_FILE_NAME, persister)
         Catch ex As Exception
-            world = MTBP.Persistence.World.Create(New Provision.WorldData, persister)
+            entity = MTBP.Persistence.World.Create(New Provision.WorldData, persister)
         End Try
         If quittable Then
-            world.SetTag(Tags.QUITTABLE)
+            entity.SetTag(Tags.QUITTABLE)
         End If
-        Return New WorldModel(world)
+        Return New WorldModel(entity)
     End Function
 End Class
