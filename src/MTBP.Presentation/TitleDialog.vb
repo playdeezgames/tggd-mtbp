@@ -11,7 +11,9 @@ Public Class TitleDialog
 
     Public Overrides Function Run() As IDialogPrompt
         Context.Render("Toxic City of SPLORR!!")
-        Return DialogPrompt.CreateChoicePrompt("", DialogChoice.Create(True, "OK", AddressOf Relaunch))
+        Return DialogPrompt.CreateChoicePrompt(
+            "",
+            DialogChoice.Create(True, "OK", MainMenuDialog.Launch(Context, Model, ExitDialog)))
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
