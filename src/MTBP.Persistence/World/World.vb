@@ -22,6 +22,12 @@ Public Class World
         End Set
     End Property
 
+    Public ReadOnly Property Messages As IEnumerable(Of String) Implements IWorld.Messages
+        Get
+            Return Data.Messages
+        End Get
+    End Property
+
     Private ReadOnly persister As IPersister
 
     Public Async Function Save(filename As String) As Task Implements IWorld.Save
@@ -38,6 +44,10 @@ Public Class World
 
     Public Overrides Sub Clear()
         MyBase.Clear()
+        ClearMessages()
+        Data.Characters.Clear()
+        Data.Locations.Clear()
+        Data.AvatarId = Nothing
     End Sub
 
     Public Function CreateLocation(Optional initializer As Action(Of ILocation) = Nothing) As ILocation Implements IWorld.CreateLocation
@@ -47,4 +57,12 @@ Public Class World
         initializer?.Invoke(result)
         Return result
     End Function
+
+    Public Sub AddMessage(message As String) Implements IWorld.AddMessage
+        Data.Messages.Add(message)
+    End Sub
+
+    Public Sub ClearMessages() Implements IWorld.ClearMessages
+        Data.Messages.Clear()
+    End Sub
 End Class

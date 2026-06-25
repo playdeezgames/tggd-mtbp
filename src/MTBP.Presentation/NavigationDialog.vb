@@ -13,7 +13,10 @@ Friend Class NavigationDialog
     End Function
 
     Public Overrides Function Run() As IDialogPrompt
-        Context.Render("Yer playing the gamme!")
+        For Each message In Model.Messages
+            Context.Render(message)
+        Next
+        'TODO: choices come from model!
         Return DialogPrompt.CreateChoicePrompt(
             "Now What?",
             DialogChoice.Create(True, "Game Menu", GameMenuDialog.Launch(Context, Model, ExitDialog)))

@@ -7,6 +7,7 @@ Friend Module WorldInitializer
                   world As IWorld,
                   context As IInitializationContext)
         world.CreateLocation(InitializeRectory(context))
+        world.Avatar.AddMessage("So it begins!")
     End Sub
 
     Private Function InitializeRectory(context As IInitializationContext) As Action(Of ILocation)

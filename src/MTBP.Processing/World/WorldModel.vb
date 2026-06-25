@@ -16,6 +16,12 @@ Public Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property Messages As IEnumerable(Of String) Implements IWorldModel.Messages
+        Get
+            Return Entity.Messages
+        End Get
+    End Property
+
     Public Sub Embark() Implements IWorldModel.Embark
         Abandon()
         Entity.Initialize(InitializationContext.Create())
