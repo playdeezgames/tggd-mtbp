@@ -18,6 +18,7 @@ Public Class WorldModel
 
     Public Sub Embark() Implements IWorldModel.Embark
         Abandon()
+        Entity.Initialize(InitializationContext.Create())
     End Sub
 
     Public Sub Abandon() Implements IWorldModel.Abandon

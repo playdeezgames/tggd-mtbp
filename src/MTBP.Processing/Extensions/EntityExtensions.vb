@@ -1,0 +1,13 @@
+﻿Imports System.Runtime.CompilerServices
+Imports MTBP.Persistence
+
+Friend Module EntityExtensions
+    <Extension>
+    Friend Sub SetName(entity As IMTBPEntity, name As String)
+        entity.SetMetadata(Metadatas.NAME, name)
+    End Sub
+    <Extension>
+    Friend Function GetName(entity As IMTBPEntity) As String
+        Return entity.GetMetadata(Metadatas.NAME)
+    End Function
+End Module

@@ -4,4 +4,6 @@ Imports TGGD.Persistence
 Public Interface IWorld
     Inherits IEntity
     Function Save(filename As String) As Task
+    Function CreateLocation(Optional initializer As Action(Of ILocation) = Nothing) As ILocation
+    Property Avatar As ICharacter
 End Interface

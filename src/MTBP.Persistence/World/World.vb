@@ -13,6 +13,15 @@ Public Class World
 
     Protected Overrides ReadOnly Property Data As WorldData
 
+    Public Property Avatar As ICharacter Implements IWorld.Avatar
+        Get
+            Return Character.Create(Me, Data, Data.AvatarId)
+        End Get
+        Set(value As ICharacter)
+            Data.AvatarId = value?.CharacterId
+        End Set
+    End Property
+
     Private ReadOnly persister As IPersister
 
     Public Async Function Save(filename As String) As Task Implements IWorld.Save
@@ -30,4 +39,12 @@ Public Class World
     Public Overrides Sub Clear()
         MyBase.Clear()
     End Sub
+
+    Public Function CreateLocation(Optional initializer As Action(Of ILocation) = Nothing) As ILocation Implements IWorld.CreateLocation
+        Dim locationId = Guid.NewGuid
+        Data.Locations(locationId) = New LocationData
+        Dim result = Location.Create(Me, Data, locationId)
+        initializer?.Invoke(result)
+        Return result
+    End Function
 End Class
