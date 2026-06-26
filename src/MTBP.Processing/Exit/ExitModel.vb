@@ -5,7 +5,7 @@ Friend Class ExitModel
 
     Private Sub New(direction As String, route As IRoute)
         Me.Direction = direction
-        Me.Text = route.GetName()
+        Me.Text = $"{route.GetName}({direction})"
     End Sub
 
     Public ReadOnly Property Text As String Implements IExitModel.Text

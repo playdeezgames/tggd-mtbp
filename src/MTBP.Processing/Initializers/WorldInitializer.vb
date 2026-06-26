@@ -10,6 +10,7 @@ Friend Module WorldInitializer
         world.CreateLocation(ChurchYardInitializer.Initialize(context))
         world.CreateLocation(ChurchInitializer.Initialize(context))
         world.CreateLocation(AbandonedHouseInitializer.Initialize(context))
+        GraveyardInitializer.Initialize(world, context)
         world.Avatar.AddMessage("So it begins!")
     End Sub
 
