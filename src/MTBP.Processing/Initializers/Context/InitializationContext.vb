@@ -10,6 +10,10 @@ Friend Class InitializationContext
 
     Public Property ChurchYard As ILocation Implements IInitializationContext.ChurchYard
 
+    Public Property AbandonedHouse As ILocation Implements IInitializationContext.AbandonedHouse
+
+    Public Property Church As ILocation Implements IInitializationContext.Church
+
     Friend Shared Function Create() As IInitializationContext
         Return New InitializationContext()
     End Function
