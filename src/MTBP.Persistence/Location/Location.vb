@@ -27,7 +27,7 @@ Friend Class Location
         Return New Location(world, data, locationId)
     End Function
 
-    Public Function CreateCharacter(Optional initializer As Action(Of ICharacter) = Nothing) As ICharacter Implements ILocation.CreateCharacter
+    Public Function CreateCharacter(Optional initializer As CharacterInitializer = Nothing) As ICharacter Implements ILocation.CreateCharacter
         Dim characterId = Guid.NewGuid
         _data.Characters(characterId) = New CharacterData With
             {

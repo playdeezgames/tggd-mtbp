@@ -50,7 +50,7 @@ Public Class World
         Data.AvatarId = Nothing
     End Sub
 
-    Public Function CreateLocation(Optional initializer As Action(Of ILocation) = Nothing) As ILocation Implements IWorld.CreateLocation
+    Public Function CreateLocation(Optional initializer As LocationInitializer = Nothing) As ILocation Implements IWorld.CreateLocation
         Dim locationId = Guid.NewGuid
         Data.Locations(locationId) = New LocationData
         Dim result = Location.Create(Me, Data, locationId)
