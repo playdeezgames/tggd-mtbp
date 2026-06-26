@@ -2,14 +2,14 @@
     Inherits BaseDialog(Of TContext)
 
     Public ReadOnly Property Text As String
-    Public ReadOnly Property OnConfirmDialog As Func(Of IDialog)
-    Public ReadOnly Property OnCancelDialog As Func(Of IDialog)
+    Public ReadOnly Property OnConfirmDialog As DialogSource
+    Public ReadOnly Property OnCancelDialog As DialogSource
 
     Private Sub New(
                    context As TContext,
                    text As String,
-                   onConfirmDialog As Func(Of IDialog),
-                   onCancelDialog As Func(Of IDialog))
+                   onConfirmDialog As DialogSource,
+                   onCancelDialog As DialogSource)
         MyBase.New(context)
         Me.Text = text
         Me.OnConfirmDialog = onConfirmDialog
@@ -19,8 +19,8 @@
     Public Shared Function Launch(
                                  context As TContext,
                                  text As String,
-                                 onConfirmDialog As Func(Of IDialog),
-                                 onCancelDialog As Func(Of IDialog)) As Func(Of IDialog)
+                                 onConfirmDialog As DialogSource,
+                                 onCancelDialog As DialogSource) As DialogSource
         Return Function() New ConfirmDialog(Of TContext)(context, text, onConfirmDialog, onCancelDialog)
     End Function
 

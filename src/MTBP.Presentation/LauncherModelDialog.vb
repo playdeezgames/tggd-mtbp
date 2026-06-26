@@ -6,11 +6,11 @@ Friend MustInherit Class LauncherModelDialog
     Friend Delegate Function LaunchDelgate(
                                      context As IDisplayContext,
                                      model As IWorldModel,
-                                     exitDialog As Func(Of IDialog)) As IDialogChoice
+                                     exitDialog As DialogSource) As IDialogChoice
 
     ReadOnly Property PromptText As String
 
-    Protected Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog), promptText As String)
+    Protected Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, promptText As String)
         MyBase.New(context, model, exitDialog)
         Me.PromptText = promptText
     End Sub

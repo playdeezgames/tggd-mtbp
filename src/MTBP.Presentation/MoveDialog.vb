@@ -6,12 +6,12 @@ Friend Class MoveDialog
 
     Private ReadOnly Direction As String
 
-    Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog), direction As String)
+    Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, direction As String)
         MyBase.New(context, model, exitDialog)
         Me.Direction = direction
     End Sub
 
-    Friend Shared Function Launch(c As IDisplayContext, m As IWorldModel, e As Func(Of IDialog), direction As String) As Func(Of IDialog)
+    Friend Shared Function Launch(c As IDisplayContext, m As IWorldModel, e As DialogSource, direction As String) As DialogSource
         Return Function() New MoveDialog(c, m, e, direction)
     End Function
 

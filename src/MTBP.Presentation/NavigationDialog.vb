@@ -4,7 +4,7 @@ Imports TGGD.Presentation
 Friend Class NavigationDialog
     Inherits LauncherModelDialog
 
-    Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog))
+    Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource)
         MyBase.New(context, model, exitDialog, "Now What?")
     End Sub
 
@@ -17,11 +17,11 @@ Friend Class NavigationDialog
         End Get
     End Property
 
-    Private Shared Function ChooseMoveMenu(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog)) As IDialogChoice
+    Private Shared Function ChooseMoveMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(model.CanMove, "Move...", MoveMenuDialog.Launch(context, model, exitDialog))
     End Function
 
-    Private Shared Function ChooseGameMenu(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog)) As IDialogChoice
+    Private Shared Function ChooseGameMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(True, "Game Menu", GameMenuDialog.Launch(context, model, exitDialog))
     End Function
 
@@ -29,7 +29,7 @@ Friend Class NavigationDialog
         Return New NavigationDialog(Context, Model, ExitDialog)
     End Function
 
-    Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
+    Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
         Return Function() New NavigationDialog(context, model, exitDialog)
     End Function
 End Class

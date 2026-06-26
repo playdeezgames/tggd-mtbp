@@ -4,7 +4,7 @@ Imports TGGD.Presentation
 Friend Class MoveMenuDialog
     Inherits LauncherModelDialog
 
-    Public Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog))
+    Public Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource)
         MyBase.New(context, model, exitDialog, "Move Which Way?")
     End Sub
 
@@ -25,11 +25,11 @@ Friend Class MoveMenuDialog
                End Function
     End Function
 
-    Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
+    Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
         Return Function() New MoveMenuDialog(context, model, exitDialog)
     End Function
 
-    Private Shared Function ChooseCancel(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog)) As IDialogChoice
+    Private Shared Function ChooseCancel(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(True, "Cancel", NeutralDialog.Launch(context, model, exitDialog))
     End Function
 

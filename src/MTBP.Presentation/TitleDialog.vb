@@ -5,7 +5,7 @@ Public Class TitleDialog
     Inherits ExitableModelDialog(Of IDisplayContext, IWorldModel)
     Implements IDialog
 
-    Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog))
+    Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource)
         MyBase.New(context, model, exitDialog)
     End Sub
 
@@ -20,7 +20,7 @@ Public Class TitleDialog
         Return New TitleDialog(Context, Model, ExitDialog)
     End Function
 
-    Public Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
+    Public Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
         Return Function() New TitleDialog(context, model, exitDialog)
     End Function
 End Class
