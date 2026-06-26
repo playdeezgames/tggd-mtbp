@@ -11,6 +11,17 @@ Friend Class Character
 
     Public ReadOnly Property CharacterId As Guid Implements ICharacter.CharacterId
 
+    Public Property Location As ILocation Implements ICharacter.Location
+        Get
+            Return Persistence.Location.Create(World, _data, Data.LocationId)
+        End Get
+        Set(value As ILocation)
+            _data.Locations(Data.LocationId).CharacterIds.Remove(CharacterId)
+            Data.LocationId = value.LocationId
+            _data.Locations(Data.LocationId).CharacterIds.Add(CharacterId)
+        End Set
+    End Property
+
     Protected Overrides ReadOnly Property Data As CharacterData
         Get
             Return _data.Characters(CharacterId)

@@ -11,13 +11,19 @@ Friend Class Location
 
     Public ReadOnly Property LocationId As Guid Implements ILocation.LocationId
 
+    Public ReadOnly Property Routes As IReadOnlyDictionary(Of String, IRoute) Implements ILocation.Routes
+        Get
+            Return Data.RouteIds.ToDictionary(Function(x) x.Key, Function(x) Route.Create(World, _data, x.Value))
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property Data As LocationData
         Get
             Return _data.Locations(LocationId)
         End Get
     End Property
 
-    Friend Shared Function Create(world As World, data As WorldData, locationId As Guid) As ILocation
+    Friend Shared Function Create(world As IWorld, data As WorldData, locationId As Guid) As ILocation
         Return New Location(world, data, locationId)
     End Function
 
@@ -29,6 +35,18 @@ Friend Class Location
             }
         Data.CharacterIds.Add(characterId)
         Dim result As ICharacter = Character.Create(World, _data, characterId)
+        initializer?.Invoke(result)
+        Return result
+    End Function
+
+    Public Function CreateRoute(direction As String, destination As ILocation, Optional initializer As Action(Of IRoute) = Nothing) As IRoute Implements ILocation.CreateRoute
+        Dim routeId = Guid.NewGuid
+        _data.Routes(routeId) = New RouteData With
+            {
+                .DestinationLocationId = destination.LocationId
+            }
+        Data.RouteIds(direction) = routeId
+        Dim result As IRoute = Route.Create(World, _data, routeId)
         initializer?.Invoke(result)
         Return result
     End Function

@@ -24,7 +24,7 @@ Public Class WorldModel
 
     Public ReadOnly Property CanMove As Boolean Implements IWorldModel.CanMove
         Get
-            Return True
+            Return Entity.Avatar.Location.Routes.Any()
         End Get
     End Property
 

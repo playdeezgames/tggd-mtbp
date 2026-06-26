@@ -6,4 +6,5 @@ Public Class WorldData
     Public Property Characters As New Dictionary(Of Guid, CharacterData)
     Public Property AvatarId As Guid?
     Public Property Messages As New List(Of String)
+    Public Property Routes As New Dictionary(Of Guid, RouteData)
 End Class
