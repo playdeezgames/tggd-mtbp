@@ -34,6 +34,12 @@ Public Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property HasGroundItems As Boolean Implements IWorldModel.HasGroundItems
+        Get
+            Return Entity.Avatar.Location.Inventory.HasItems
+        End Get
+    End Property
+
     Public Sub Embark() Implements IWorldModel.Embark
         Abandon()
         Entity.Initialize(InitializationContext.Create())

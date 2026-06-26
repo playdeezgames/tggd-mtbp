@@ -15,5 +15,8 @@ Friend Module WorldExtensions
                 world.AddMessage($"- {route.Key}: {route.Value.GetName}")
             Next
         End If
+        If location.Inventory.HasItems Then
+            world.AddMessage("There are items on the ground.")
+        End If
     End Sub
 End Module

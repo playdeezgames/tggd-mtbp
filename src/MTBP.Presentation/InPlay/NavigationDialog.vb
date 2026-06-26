@@ -10,12 +10,19 @@ Friend Class NavigationDialog
 
     Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
         Get
-            Return {
-                    AddressOf ChooseMoveMenu,
-                    AddressOf ChooseGameMenu
-                }
+            Return Enumerable.Empty(Of LaunchDelgate).
+                Append(AddressOf ChooseMoveMenu).
+                Append(AddressOf ChooseGroundMenu).
+                Append(AddressOf ChooseGameMenu)
         End Get
     End Property
+
+    Private Function ChooseGroundMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
+        Return DialogChoice.Create(
+            model.HasGroundItems,
+            "Ground...",
+            GroundMenuDialog.Launch(context, model, exitDialog))
+    End Function
 
     Private Shared Function ChooseMoveMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(model.CanMove, "Move...", MoveMenuDialog.Launch(context, model, exitDialog))

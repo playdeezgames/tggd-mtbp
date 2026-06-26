@@ -6,6 +6,7 @@ Public Interface IWorldModel
     Sub Embark()
     Sub Abandon()
     Sub Move(direction As String)
+    ReadOnly Property HasGroundItems As Boolean
     ReadOnly Property CanMove As Boolean
     ReadOnly Property Exits As IEnumerable(Of IExitModel)
     ReadOnly Property Messages As IEnumerable(Of String)
