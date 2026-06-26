@@ -40,6 +40,12 @@ Public Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property GroundItems As IEnumerable(Of IGroundItemModel) Implements IWorldModel.GroundItems
+        Get
+            Return Entity.Avatar.Location.Inventory.Items.Select(AddressOf GroundItemModel.Create)
+        End Get
+    End Property
+
     Public Sub Embark() Implements IWorldModel.Embark
         Abandon()
         Entity.Initialize(InitializationContext.Create())

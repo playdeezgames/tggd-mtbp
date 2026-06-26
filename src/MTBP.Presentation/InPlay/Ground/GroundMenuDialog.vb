@@ -11,9 +11,14 @@ Friend Class GroundMenuDialog
     Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
         Get
             Return Enumerable.Empty(Of LaunchDelgate).
-                Append(AddressOf ChooseNeverMind)
+                Append(AddressOf ChooseNeverMind).
+                Concat(Model.GroundItems.Select(AddressOf ChooseItem))
         End Get
     End Property
+
+    Private Function ChooseItem(itemModel As IGroundItemModel) As LaunchDelgate
+        Return Function(c, m, e) DialogChoice.Create(True, itemModel.Text, GroundItemMenuDialog.Launch(c, m, e, itemModel))
+    End Function
 
     Private Function ChooseNeverMind(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(True, "Never Mind", NeutralDialog.Launch(context, model, exitDialog))

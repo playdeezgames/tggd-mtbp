@@ -10,4 +10,5 @@ Public Interface IWorldModel
     ReadOnly Property CanMove As Boolean
     ReadOnly Property Exits As IEnumerable(Of IExitModel)
     ReadOnly Property Messages As IEnumerable(Of String)
+    ReadOnly Property GroundItems As IEnumerable(Of IGroundItemModel)
 End Interface
