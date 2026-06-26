@@ -1,12 +1,12 @@
 ﻿Imports TGGD.Presentation
-
+Friend Delegate Sub DialogPredicate(dialog As IDialog)
 Friend Class WrappedPrompt
     Implements IDialogPrompt
 
     Private _wrapped As IDialogPrompt
-    Private predicate As Action(Of IDialog)
+    Private predicate As DialogPredicate
 
-    Public Sub New(dialogPrompt As IDialogPrompt, predicate As Action(Of IDialog))
+    Public Sub New(dialogPrompt As IDialogPrompt, predicate As DialogPredicate)
         Me._wrapped = dialogPrompt
         Me.predicate = predicate
     End Sub
