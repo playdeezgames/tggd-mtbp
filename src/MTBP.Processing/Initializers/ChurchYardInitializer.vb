@@ -11,13 +11,13 @@ Friend Module ChurchYardInitializer
                End Sub
     End Function
 
-    Private Function InitializeRectoryExit(context As IInitializationContext) As Action(Of IRoute)
+    Private Function InitializeRectoryExit(context As IInitializationContext) As RouteInitializer
         Return Sub(route)
                    route.SetName("Rectory Exit")
                End Sub
     End Function
 
-    Private Function InitializeRectoryEntrance(context As IInitializationContext) As Action(Of IRoute)
+    Private Function InitializeRectoryEntrance(context As IInitializationContext) As RouteInitializer
         Return Sub(route)
                    route.SetName("Rectory Entrance")
                End Sub

@@ -39,7 +39,7 @@ Friend Class Location
         Return result
     End Function
 
-    Public Function CreateRoute(direction As String, destination As ILocation, Optional initializer As Action(Of IRoute) = Nothing) As IRoute Implements ILocation.CreateRoute
+    Public Function CreateRoute(direction As String, destination As ILocation, Optional initializer As RouteInitializer = Nothing) As IRoute Implements ILocation.CreateRoute
         Dim routeId = Guid.NewGuid
         _data.Routes(routeId) = New RouteData With
             {
