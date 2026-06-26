@@ -28,9 +28,16 @@ Public Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property Exits As IEnumerable(Of IExitModel) Implements IWorldModel.Exits
+        Get
+            Return Entity.Avatar.Location.Routes.Select(Function(x) ExitModel.Create(x.Key, x.Value))
+        End Get
+    End Property
+
     Public Sub Embark() Implements IWorldModel.Embark
         Abandon()
         Entity.Initialize(InitializationContext.Create())
+        Entity.Describe()
     End Sub
 
     Public Sub Abandon() Implements IWorldModel.Abandon
@@ -39,6 +46,13 @@ Public Class WorldModel
         If quittable Then
             Entity.SetTag(Tags.QUITTABLE)
         End If
+    End Sub
+
+    Public Sub Move(direction As String) Implements IWorldModel.Move
+        Entity.ClearMessages()
+        Entity.AddMessage($"{Entity.Avatar.GetName()} moves {direction}.")
+        Entity.Avatar.Location = Entity.Avatar.Location.Routes(direction).Destination
+        Entity.Describe()
     End Sub
 
     Public Shared Async Function Create(quittable As Boolean, persister As IPersister) As Task(Of IWorldModel)

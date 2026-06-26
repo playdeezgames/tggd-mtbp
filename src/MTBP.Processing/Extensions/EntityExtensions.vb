@@ -10,4 +10,8 @@ Friend Module EntityExtensions
     Friend Function GetName(entity As IMTBPEntity) As String
         Return entity.GetMetadata(Metadatas.NAME)
     End Function
+    <Extension>
+    Friend Function GetToxicity(entity As IMTBPEntity) As Integer
+        Return If(entity.TryGetCounter(Counters.TOXICITY), 0)
+    End Function
 End Module

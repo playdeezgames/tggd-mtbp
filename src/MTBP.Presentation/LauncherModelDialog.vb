@@ -3,6 +3,10 @@ Imports TGGD.Presentation
 
 Friend MustInherit Class LauncherModelDialog
     Inherits ExitableModelDialog(Of IDisplayContext, IWorldModel)
+    Friend Delegate Function LaunchDelgate(
+                                     context As IDisplayContext,
+                                     model As IWorldModel,
+                                     exitDialog As Func(Of IDialog)) As IDialogChoice
 
     ReadOnly Property PromptText As String
 
@@ -11,7 +15,7 @@ Friend MustInherit Class LauncherModelDialog
         Me.PromptText = promptText
     End Sub
 
-    Protected MustOverride ReadOnly Property Launchers As IEnumerable(Of Func(Of IDisplayContext, IWorldModel, Func(Of IDialog), IDialogChoice))
+    Protected MustOverride ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
 
     Public Overrides Function Run() As IDialogPrompt
         For Each message In Model.Messages

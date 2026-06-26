@@ -8,7 +8,7 @@ Friend Class NavigationDialog
         MyBase.New(context, model, exitDialog, "Now What?")
     End Sub
 
-    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of Func(Of IDisplayContext, IWorldModel, Func(Of IDialog), IDialogChoice))
+    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
         Get
             Return {
                     AddressOf ChooseMoveMenu,

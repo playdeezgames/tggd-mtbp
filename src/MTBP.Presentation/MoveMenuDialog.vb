@@ -8,13 +8,22 @@ Friend Class MoveMenuDialog
         MyBase.New(context, model, exitDialog, "Move Which Way?")
     End Sub
 
-    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of Func(Of IDisplayContext, IWorldModel, Func(Of IDialog), IDialogChoice))
+    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
         Get
-            Return {
-                AddressOf ChooseCancel
+            Dim choices As New List(Of LaunchDelgate) From
+                {
+                    AddressOf ChooseCancel
                 }
+            choices.AddRange(Model.Exits.Select(AddressOf MakeExitChoice))
+            Return choices
         End Get
     End Property
+
+    Private Function MakeExitChoice(exitModel As IExitModel) As LaunchDelgate
+        Return Function(c, m, e)
+                   Return DialogChoice.Create(True, exitModel.Text, MoveDialog.Launch(c, m, e, exitModel.Direction))
+               End Function
+    End Function
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
         Return Function() New MoveMenuDialog(context, model, exitDialog)
