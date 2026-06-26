@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Provision
 
 Friend Class Location
-    Inherits MTBPEntity(Of LocationData)
+    Inherits InventoriedEntity(Of LocationData)
     Implements ILocation
 
     Private Sub New(world As IWorld, data As WorldData, locationId As Guid)

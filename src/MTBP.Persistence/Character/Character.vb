@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Provision
 
 Friend Class Character
-    Inherits MTBPEntity(Of CharacterData)
+    Inherits InventoriedEntity(Of CharacterData)
     Implements ICharacter
 
     Private Sub New(world As IWorld, data As WorldData, characterId As Guid)

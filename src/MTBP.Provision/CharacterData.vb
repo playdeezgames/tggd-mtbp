@@ -1,4 +1,4 @@
 ﻿Public Class CharacterData
-    Inherits MTBPEntityData
+    Inherits InventoriedEntityData
     Public Property LocationId As Guid
 End Class

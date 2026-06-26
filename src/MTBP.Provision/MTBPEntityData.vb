@@ -1,5 +1,5 @@
 ﻿Imports TGGD.Provision
 
-Public Class MTBPEntityData
+Public MustInherit Class MTBPEntityData
     Inherits EntityData
 End Class
