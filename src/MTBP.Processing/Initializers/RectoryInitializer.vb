@@ -13,6 +13,12 @@ Friend Module RectoryInitializer
         Return Sub(character)
                    character.SetName("Ölën Kÿrpä")
                    character.World.Avatar = character
+                   character.SetCounter(Counters.IMMUNITY, MAXIMUM_IMMUNITY)
+                   character.SetCounterMaximum(Counters.IMMUNITY, MAXIMUM_IMMUNITY)
+                   character.SetCounterMinimum(Counters.IMMUNITY, MINIMUM_IMMUNITY)
+                   character.SetCounter(Counters.HEALTH, MAXIMUM_HEALTH)
+                   character.SetCounterMaximum(Counters.HEALTH, MAXIMUM_HEALTH)
+                   character.SetCounterMinimum(Counters.HEALTH, MINIMUM_HEALTH)
                End Sub
     End Function
 

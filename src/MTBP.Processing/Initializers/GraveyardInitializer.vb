@@ -57,5 +57,6 @@ Friend Module GraveyardInitializer
 
     Private Sub InitializeGraveyardLocation(location As ILocation)
         location.SetName("graveyard")
+        location.SetCounter(Counters.TOXICITY, RNG.RollDice(GRAVEYARD_TOXICITY_DICE))
     End Sub
 End Module

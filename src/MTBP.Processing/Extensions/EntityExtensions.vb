@@ -14,4 +14,20 @@ Friend Module EntityExtensions
     Friend Function GetToxicity(entity As IMTBPEntity) As Integer
         Return If(entity.TryGetCounter(Counters.TOXICITY), 0)
     End Function
+    <Extension>
+    Friend Function GetHealth(entity As IMTBPEntity) As Integer
+        Return If(entity.TryGetCounter(Counters.HEALTH), 0)
+    End Function
+    <Extension>
+    Friend Function GetMaximumHealth(entity As IMTBPEntity) As Integer
+        Return entity.GetCounterMaximum(Counters.HEALTH)
+    End Function
+    <Extension>
+    Friend Function GetImmunity(entity As IMTBPEntity) As Integer
+        Return If(entity.TryGetCounter(Counters.IMMUNITY), 0)
+    End Function
+    <Extension>
+    Friend Function GetMaximumImmunity(entity As IMTBPEntity) As Integer
+        Return entity.GetCounterMaximum(Counters.IMMUNITY)
+    End Function
 End Module

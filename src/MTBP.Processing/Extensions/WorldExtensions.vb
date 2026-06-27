@@ -7,6 +7,8 @@ Friend Module WorldExtensions
         Dim character = world.Avatar
         Dim location = character.Location
         world.AddMessage($"{character.GetName} is in {location.GetName}.")
+        world.AddMessage($"Health: {character.GetHealth()}/{character.GetMaximumHealth()}")
+        world.AddMessage($"Immunity: {character.GetImmunity()}/{character.GetMaximumImmunity()}")
         world.AddMessage($"Toxicity Level: {location.GetToxicity()}")
         Dim routes = location.Routes
         If routes.Any Then
