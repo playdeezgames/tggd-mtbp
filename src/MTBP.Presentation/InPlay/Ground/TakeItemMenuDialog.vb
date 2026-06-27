@@ -13,7 +13,7 @@ Friend Class TakeItemMenuDialog
         Me.ItemModel = itemModel
     End Sub
 
-    Public ReadOnly Property ItemModel As IGroundItemModel
+    Private ReadOnly ItemModel As IGroundItemModel
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IGroundItemModel) As DialogSource
         Return Function() New TakeItemMenuDialog(context, model, exitDialog, itemModel)

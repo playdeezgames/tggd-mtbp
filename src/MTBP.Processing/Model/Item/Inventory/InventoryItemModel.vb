@@ -15,6 +15,14 @@ Friend Class InventoryItemModel
 
     Public ReadOnly Property Item As IItem
 
+    Public Sub Drop() Implements IInventoryItemModel.Drop
+        Dim world = Item.World
+        world.ClearMessages()
+        Dim character = world.Avatar
+        Item.Inventory = character.Location.Inventory
+        character.AddMessage($"{character.GetName} drops {Item.GetName}.")
+        world.Describe()
+    End Sub
 
     Friend Shared Function Create(item As IItem) As IInventoryItemModel
         Return New InventoryItemModel(item)

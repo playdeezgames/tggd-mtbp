@@ -14,9 +14,14 @@ Friend Class InventoryItemMenuDialog
     Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
         Get
             Return Enumerable.Empty(Of LaunchDelgate).
-                Append(AddressOf ChooseNeverMind)
+                Append(AddressOf ChooseNeverMind).
+                Append(AddressOf ChooseDrop)
         End Get
     End Property
+
+    Private Function ChooseDrop(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
+        Return DialogChoice.Create(True, "Drop", DropItemMenuDialog.Launch(context, model, exitDialog, ItemModel))
+    End Function
 
     Private Function ChooseNeverMind(
                                     context As IDisplayContext,
