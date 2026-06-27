@@ -46,6 +46,19 @@ Public Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property HasItems As Boolean Implements IWorldModel.HasItems
+        Get
+            Return Entity.Avatar.Inventory.HasItems
+        End Get
+    End Property
+
+    Public ReadOnly Property InventoryItems As IEnumerable(Of IInventoryItemModel) Implements IWorldModel.InventoryItems
+        Get
+            Return Entity.Avatar.Inventory.Items.Select(AddressOf InventoryItemModel.Create)
+
+        End Get
+    End Property
+
     Public Sub Embark() Implements IWorldModel.Embark
         Abandon()
         Entity.Initialize(InitializationContext.Create())

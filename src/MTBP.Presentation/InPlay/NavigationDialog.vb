@@ -2,7 +2,7 @@
 Imports TGGD.Presentation
 
 Friend Class NavigationDialog
-    Inherits LauncherModelDialog
+    Inherits PickerDialog
 
     Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource)
         MyBase.New(context, model, exitDialog, "Now What?")
@@ -13,6 +13,7 @@ Friend Class NavigationDialog
             Return Enumerable.Empty(Of LaunchDelgate).
                 Append(AddressOf ChooseMoveMenu).
                 Append(AddressOf ChooseGroundMenu).
+                Append(AddressOf ChooseInventoryMenu).
                 Append(AddressOf ChooseGameMenu)
         End Get
     End Property
@@ -22,6 +23,13 @@ Friend Class NavigationDialog
             model.HasGroundItems,
             "Ground...",
             GroundMenuDialog.Launch(context, model, exitDialog))
+    End Function
+
+    Private Function ChooseInventoryMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
+        Return DialogChoice.Create(
+            model.HasItems,
+            "Inventory...",
+            InventoryMenuDialog.Launch(context, model, exitDialog))
     End Function
 
     Private Shared Function ChooseMoveMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
