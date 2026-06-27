@@ -25,7 +25,12 @@ Friend Class GroundMenuDialog
     End Function
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
-        Return Function() New GroundMenuDialog(context, model, exitDialog)
+        Return Function()
+                   If model.HasGroundItems Then
+                       Return New GroundMenuDialog(context, model, exitDialog)
+                   End If
+                   Return NeutralDialog.Launch(context, model, exitDialog).Invoke()
+               End Function
     End Function
 
     Protected Overrides Function Relaunch() As IDialog

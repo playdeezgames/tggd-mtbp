@@ -15,6 +15,15 @@ Friend Class GroundItemModel
 
     Public ReadOnly Property Item As IItem
 
+    Public Sub Take() Implements IGroundItemModel.Take
+        Dim world = Item.World
+        Dim character = world.Avatar
+        Item.Inventory = character.Inventory
+        world.ClearMessages()
+        character.AddMessage($"{character.GetName} takes the {Item.GetName}.")
+        world.Describe()
+    End Sub
+
     Friend Shared Function Create(item As IItem) As IGroundItemModel
         Return New GroundItemModel(item)
     End Function
