@@ -5,6 +5,10 @@ Friend Module WorldExtensions
     <Extension>
     Sub Describe(world As IWorld)
         Dim character = world.Avatar
+        If character.IsDead() Then
+            world.AddMessage($"{character.GetName} is dead.")
+            Return
+        End If
         Dim location = character.Location
         world.AddMessage($"{character.GetName} is in {location.GetName}.")
         world.AddMessage($"Health: {character.GetHealth()}/{character.GetMaximumHealth()}")

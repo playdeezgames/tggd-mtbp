@@ -24,7 +24,7 @@ Public Class WorldModel
 
     Public ReadOnly Property CanMove As Boolean Implements IWorldModel.CanMove
         Get
-            Return Entity.Avatar.Location.Routes.Any()
+            Return Not Entity.Avatar.IsDead AndAlso Entity.Avatar.Location.Routes.Any()
         End Get
     End Property
 
@@ -36,7 +36,7 @@ Public Class WorldModel
 
     Public ReadOnly Property HasGroundItems As Boolean Implements IWorldModel.HasGroundItems
         Get
-            Return Entity.Avatar.Location.Inventory.HasItems
+            Return Not Entity.Avatar.IsDead AndAlso Entity.Avatar.Location.Inventory.HasItems
         End Get
     End Property
 
@@ -48,7 +48,7 @@ Public Class WorldModel
 
     Public ReadOnly Property HasItems As Boolean Implements IWorldModel.HasItems
         Get
-            Return Entity.Avatar.Inventory.HasItems
+            Return Not Entity.Avatar.IsDead AndAlso Entity.Avatar.Inventory.HasItems
         End Get
     End Property
 
@@ -77,7 +77,27 @@ Public Class WorldModel
         Entity.ClearMessages()
         Entity.AddMessage($"{Entity.Avatar.GetName()} moves {direction}.")
         Entity.Avatar.Location = Entity.Avatar.Location.Routes(direction).Destination
+        HandleToxicity()
         Entity.Describe()
+    End Sub
+
+    Private Sub HandleToxicity()
+        Dim character = Entity.Avatar
+        Dim toxicity = character.Location.GetToxicity()
+        If toxicity <= 0 Then
+            Return
+        End If
+        character.AddMessage($"{character.GetName} reacts to {toxicity} toxicity.")
+        Dim immunity = Math.Min(toxicity, character.GetImmunity())
+        If immunity > 0 Then
+            character.AddMessage($"{character.GetName} loses {immunity} immunity.")
+            character.ChangeCounter(Counters.IMMUNITY, -immunity)
+        End If
+        toxicity -= immunity
+        If toxicity > 0 Then
+            character.AddMessage($"{character.GetName} loses {toxicity} health.")
+            character.ChangeCounter(Counters.HEALTH, -toxicity)
+        End If
     End Sub
 
     Public Shared Async Function Create(quittable As Boolean, persister As IPersister) As Task(Of IWorldModel)

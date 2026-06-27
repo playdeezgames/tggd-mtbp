@@ -14,4 +14,8 @@ Friend Module CharacterExtensions
             character.World.AddMessage(message)
         End If
     End Sub
+    <Extension>
+    Friend Function IsDead(character As ICharacter) As Boolean
+        Return character.GetHealth() = character.GetCounterMinimum(Counters.HEALTH)
+    End Function
 End Module
