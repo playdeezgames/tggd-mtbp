@@ -6,10 +6,14 @@ Public Interface IWorldModel
     Sub Embark()
     Sub Abandon()
     Sub Move(direction As String)
-    ReadOnly Property HasGroundItems As Boolean
+    Sub ShowStatus()
+    Sub Look()
+    ReadOnly Property StatusChoiceVisible As Boolean
+    ReadOnly Property LookChoiceVisible As Boolean
     ReadOnly Property CanMove As Boolean
     ReadOnly Property Exits As IEnumerable(Of IExitModel)
     ReadOnly Property Messages As IEnumerable(Of String)
+    ReadOnly Property HasGroundItems As Boolean
     ReadOnly Property GroundItems As IEnumerable(Of IGroundItemModel)
     ReadOnly Property HasItems As Boolean
     ReadOnly Property InventoryItems As IEnumerable(Of IInventoryItemModel)

@@ -189,4 +189,12 @@ Public MustInherit Class Entity(Of TData As EntityData)
         End If
         Return Double.MaxValue
     End Function
+
+    Public Function IsCounterMinimum(counterId As String) As Boolean Implements IEntity.IsCounterMinimum
+        Return GetCounter(counterId) = GetCounterMinimum(counterId)
+    End Function
+
+    Public Function IsCounterMaximum(counterId As String) As Boolean Implements IEntity.IsCounterMaximum
+        Return GetCounter(counterId) = GetCounterMaximum(counterId)
+    End Function
 End Class

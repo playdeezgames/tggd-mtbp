@@ -19,6 +19,10 @@ Friend Module RectoryInitializer
                    character.SetCounter(Counters.HEALTH, MAXIMUM_HEALTH)
                    character.SetCounterMaximum(Counters.HEALTH, MAXIMUM_HEALTH)
                    character.SetCounterMinimum(Counters.HEALTH, MINIMUM_HEALTH)
+                   character.SetCounter(Counters.HUNGER_RATE, 1)
+                   character.SetCounter(Counters.SATIETY, MAXIMUM_SATIETY)
+                   character.SetCounterMaximum(Counters.SATIETY, MAXIMUM_SATIETY)
+                   character.SetCounterMinimum(Counters.SATIETY, MINIMUM_SATIETY)
                End Sub
     End Function
 

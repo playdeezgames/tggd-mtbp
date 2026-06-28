@@ -21,7 +21,7 @@ Friend Class GroundItemModel
         Item.Inventory = character.Inventory
         world.ClearMessages()
         character.AddMessage($"{character.GetName} takes the {Item.GetName}.")
-        world.Describe()
+        character.Look()
     End Sub
 
     Friend Shared Function Create(item As IItem) As IGroundItemModel

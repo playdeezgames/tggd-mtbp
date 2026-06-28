@@ -59,10 +59,22 @@ Public Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property StatusChoiceVisible As Boolean Implements IWorldModel.StatusChoiceVisible
+        Get
+            Return Entity.Avatar.GetView() <> Views.STATUS
+        End Get
+    End Property
+
+    Public ReadOnly Property LookChoiceVisible As Boolean Implements IWorldModel.LookChoiceVisible
+        Get
+            Return Entity.Avatar.GetView() <> Views.LOOK
+        End Get
+    End Property
+
     Public Sub Embark() Implements IWorldModel.Embark
         Abandon()
         Entity.Initialize(InitializationContext.Create())
-        Entity.Describe()
+        Entity.Avatar.Look()
     End Sub
 
     Public Sub Abandon() Implements IWorldModel.Abandon
@@ -77,27 +89,19 @@ Public Class WorldModel
         Entity.ClearMessages()
         Entity.AddMessage($"{Entity.Avatar.GetName()} moves {direction}.")
         Entity.Avatar.Location = Entity.Avatar.Location.Routes(direction).Destination
-        HandleToxicity()
-        Entity.Describe()
+        Entity.Avatar.HandleToxicity()
+        Entity.Avatar.HandleHunger()
+        Entity.Avatar.Look()
     End Sub
 
-    Private Sub HandleToxicity()
-        Dim character = Entity.Avatar
-        Dim toxicity = character.Location.GetToxicity()
-        If toxicity <= 0 Then
-            Return
-        End If
-        character.AddMessage($"{character.GetName} reacts to {toxicity} toxicity.")
-        Dim immunity = Math.Min(toxicity, character.GetImmunity())
-        If immunity > 0 Then
-            character.AddMessage($"{character.GetName} loses {immunity} immunity.")
-            character.ChangeCounter(Counters.IMMUNITY, -immunity)
-        End If
-        toxicity -= immunity
-        If toxicity > 0 Then
-            character.AddMessage($"{character.GetName} loses {toxicity} health.")
-            character.ChangeCounter(Counters.HEALTH, -toxicity)
-        End If
+    Public Sub ShowStatus() Implements IWorldModel.ShowStatus
+        Entity.ClearMessages()
+        Entity.Avatar.ShowStatus()
+    End Sub
+
+    Public Sub Look() Implements IWorldModel.Look
+        Entity.ClearMessages()
+        Entity.Avatar.Look()
     End Sub
 
     Public Shared Async Function Create(quittable As Boolean, persister As IPersister) As Task(Of IWorldModel)

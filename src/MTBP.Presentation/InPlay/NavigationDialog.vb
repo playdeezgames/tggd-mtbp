@@ -14,9 +14,28 @@ Friend Class NavigationDialog
                 Append(AddressOf ChooseMoveMenu).
                 Append(AddressOf ChooseGroundMenu).
                 Append(AddressOf ChooseInventoryMenu).
+                Append(AddressOf ChooseStatusMenu).
+                Append(AddressOf ChooseLookMenu).
                 Append(AddressOf ChooseGameMenu)
         End Get
     End Property
+
+    Private Function ChooseLookMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
+        Return DialogChoice.Create(
+            model.LookChoiceVisible,
+            "Look",
+            LookMenuDialog.Launch(context, model, exitDialog))
+    End Function
+
+    Private Function ChooseStatusMenu(
+                                     context As IDisplayContext,
+                                     model As IWorldModel,
+                                     exitDialog As DialogSource) As IDialogChoice
+        Return DialogChoice.Create(
+            model.StatusChoiceVisible,
+            "Status",
+            StatusMenuDialog.Launch(context, model, exitDialog))
+    End Function
 
     Private Function ChooseGroundMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(

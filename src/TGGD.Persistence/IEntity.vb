@@ -31,4 +31,6 @@ Public Interface IEntity
     Function GetDimensionMinimum(dimensionId As String) As Double
     Sub SetDimensionMaximum(dimensionId As String, dimensionMaximum As Double)
     Function GetDimensionMaximum(dimensionId As String) As Double
+    Function IsCounterMinimum(counterId As String) As Boolean
+    Function IsCounterMaximum(counterId As String) As Boolean
 End Interface

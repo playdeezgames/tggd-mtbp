@@ -30,4 +30,20 @@ Friend Module EntityExtensions
     Friend Function GetMaximumImmunity(entity As IMTBPEntity) As Integer
         Return entity.GetCounterMaximum(Counters.IMMUNITY)
     End Function
+    <Extension>
+    Friend Function GetSatiety(entity As IMTBPEntity) As Integer
+        Return entity.GetCounter(Counters.SATIETY)
+    End Function
+    <Extension>
+    Friend Function GetMaximumSatiety(entity As IMTBPEntity) As Integer
+        Return entity.GetCounterMaximum(Counters.SATIETY)
+    End Function
+    <Extension>
+    Friend Sub SetView(entity As IMTBPEntity, view As String)
+        entity.SetMetadata(Metadatas.VIEW, view)
+    End Sub
+    <Extension>
+    Friend Function GetView(entity As IMTBPEntity) As String
+        Return If(entity.TryGetMetadata(Metadatas.VIEW), Grimoire.DEFAULT_VIEW)
+    End Function
 End Module

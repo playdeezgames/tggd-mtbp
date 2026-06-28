@@ -21,7 +21,7 @@ Friend Class InventoryItemModel
         Dim character = world.Avatar
         Item.Inventory = character.Location.Inventory
         character.AddMessage($"{character.GetName} drops {Item.GetName}.")
-        world.Describe()
+        character.Look()
     End Sub
 
     Friend Shared Function Create(item As IItem) As IInventoryItemModel

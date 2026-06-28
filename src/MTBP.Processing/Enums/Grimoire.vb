@@ -8,4 +8,7 @@
     Friend Const MAXIMUM_IMMUNITY = 100
     Friend Const MINIMUM_HEALTH = 0
     Friend Const MAXIMUM_HEALTH = 100
+    Friend Const MINIMUM_SATIETY = 0
+    Friend Const MAXIMUM_SATIETY = 100
+    Friend ReadOnly DEFAULT_VIEW As String = Views.LOOK
 End Module
