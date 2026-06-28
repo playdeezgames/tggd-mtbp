@@ -21,7 +21,7 @@ Friend Class MoveMenuDialog
 
     Private Function MakeExitChoice(exitModel As IExitModel) As LaunchDelgate
         Return Function(c, m, e)
-                   Return DialogChoice.Create(True, exitModel.Text, MoveDialog.Launch(c, m, e, exitModel.Direction))
+                   Return DialogChoice.Create(True, exitModel.Text, MoveActivity.Launch(c, m, e, exitModel.Direction))
                End Function
     End Function
 

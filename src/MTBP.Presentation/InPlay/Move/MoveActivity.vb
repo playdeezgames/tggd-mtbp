@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Friend Class MoveDialog
+Friend Class MoveActivity
     Inherits ExitableModelDialog(Of IDisplayContext, IWorldModel)
 
     Private ReadOnly Direction As String
@@ -12,7 +12,7 @@ Friend Class MoveDialog
     End Sub
 
     Friend Shared Function Launch(c As IDisplayContext, m As IWorldModel, e As DialogSource, direction As String) As DialogSource
-        Return Function() New MoveDialog(c, m, e, direction)
+        Return Function() New MoveActivity(c, m, e, direction)
     End Function
 
     Public Overrides Function Run() As IDialogPrompt
@@ -21,6 +21,6 @@ Friend Class MoveDialog
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return New MoveDialog(Context, Model, ExitDialog, Direction)
+        Return New MoveActivity(Context, Model, ExitDialog, Direction)
     End Function
 End Class

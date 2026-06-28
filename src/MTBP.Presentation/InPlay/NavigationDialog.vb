@@ -24,7 +24,7 @@ Friend Class NavigationDialog
         Return DialogChoice.Create(
             model.LookChoiceVisible,
             "Look",
-            LookMenuDialog.Launch(context, model, exitDialog))
+            LookActivity.Launch(context, model, exitDialog))
     End Function
 
     Private Function ChooseStatusMenu(
@@ -34,7 +34,7 @@ Friend Class NavigationDialog
         Return DialogChoice.Create(
             model.StatusChoiceVisible,
             "Status",
-            StatusMenuDialog.Launch(context, model, exitDialog))
+            StatusActivity.Launch(context, model, exitDialog))
     End Function
 
     Private Function ChooseGroundMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
