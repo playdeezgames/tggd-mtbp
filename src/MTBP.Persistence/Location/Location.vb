@@ -17,6 +17,12 @@ Friend Class Location
         End Get
     End Property
 
+    Public ReadOnly Property Features As IEnumerable(Of IFeature) Implements ILocation.Features
+        Get
+            Return Data.FeatureIds.Select(Function(x) Feature.Create(World, _data, x))
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property Data As LocationData
         Get
             Return _data.Locations(LocationId)
@@ -47,6 +53,18 @@ Friend Class Location
             }
         Data.RouteIds(direction) = routeId
         Dim result As IRoute = Route.Create(World, _data, routeId)
+        initializer?.Invoke(result)
+        Return result
+    End Function
+
+    Public Function CreateFeature(Optional initializer As FeatureInitializer = Nothing) As IFeature Implements ILocation.CreateFeature
+        Dim featureId = Guid.NewGuid
+        _data.Features(featureId) = New FeatureData With
+            {
+                .LocationId = LocationId
+            }
+        Data.FeatureIds.Add(featureId)
+        Dim result As IFeature = Feature.Create(World, _data, featureId)
         initializer?.Invoke(result)
         Return result
     End Function

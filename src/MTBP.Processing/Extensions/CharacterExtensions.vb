@@ -72,6 +72,13 @@ Friend Module CharacterExtensions
         Dim location = character.Location
         character.AddMessage($"{character.GetName} is in {location.GetName}.")
         character.AddMessage($"Local Toxicity Level: {location.GetToxicity()}")
+        Dim features = location.Features
+        If features.Any Then
+            character.AddMessage("Features:")
+            For Each feature In features
+                character.AddMessage($"- {feature.GetName}")
+            Next
+        End If
         Dim routes = location.Routes
         If routes.Any Then
             character.AddMessage("Exits:")
