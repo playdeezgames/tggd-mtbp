@@ -71,6 +71,18 @@ Public Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property HasFeatures As Boolean Implements IWorldModel.HasFeatures
+        Get
+            Return Not Entity.Avatar.IsDead AndAlso Entity.Avatar.Location.HasFeatures
+        End Get
+    End Property
+
+    Public ReadOnly Property Features As IEnumerable(Of IFeatureModel) Implements IWorldModel.Features
+        Get
+            Return Entity.Avatar.Location.Features.Select(Function(x) FeatureModel.Create(x))
+        End Get
+    End Property
+
     Public Sub Embark() Implements IWorldModel.Embark
         Abandon()
         Entity.Initialize(InitializationContext.Create())

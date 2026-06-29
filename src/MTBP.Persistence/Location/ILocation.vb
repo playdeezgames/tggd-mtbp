@@ -7,4 +7,5 @@ Public Interface ILocation
     ReadOnly Property Routes As IReadOnlyDictionary(Of String, IRoute)
     Function CreateFeature(Optional initializer As FeatureInitializer = Nothing) As IFeature
     ReadOnly Property Features As IEnumerable(Of IFeature)
+    ReadOnly Property HasFeatures As Boolean
 End Interface

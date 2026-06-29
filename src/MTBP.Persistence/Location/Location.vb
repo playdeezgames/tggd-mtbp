@@ -23,6 +23,12 @@ Friend Class Location
         End Get
     End Property
 
+    Public ReadOnly Property HasFeatures As Boolean Implements ILocation.HasFeatures
+        Get
+            Return Data.FeatureIds.Count <> 0
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property Data As LocationData
         Get
             Return _data.Locations(LocationId)

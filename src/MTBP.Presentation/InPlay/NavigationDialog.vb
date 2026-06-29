@@ -14,6 +14,7 @@ Friend Class NavigationDialog
                 Append(AddressOf ChooseMoveMenu).
                 Append(AddressOf ChooseGroundMenu).
                 Append(AddressOf ChooseInventoryMenu).
+                Append(AddressOf ChooseFeatureMenu).
                 Append(AddressOf ChooseStatusMenu).
                 Append(AddressOf ChooseLookMenu).
                 Append(AddressOf ChooseGameMenu)
@@ -49,6 +50,13 @@ Friend Class NavigationDialog
             model.HasItems,
             "Inventory...",
             InventoryMenuDialog.Launch(context, model, exitDialog))
+    End Function
+
+    Private Function ChooseFeatureMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
+        Return DialogChoice.Create(
+            model.HasFeatures,
+            "Feature...",
+            FeaturesMenuDialog.Launch(context, model, exitDialog))
     End Function
 
     Private Shared Function ChooseMoveMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
