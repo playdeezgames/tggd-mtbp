@@ -23,7 +23,7 @@ Friend Class NavigationMenu
 
     Private Function ChooseLookMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(
-            model.LookChoiceVisible,
+            True,
             "Look",
             LookActivity.Launch(context, model, exitDialog))
     End Function
@@ -33,7 +33,7 @@ Friend Class NavigationMenu
                                      model As IWorldModel,
                                      exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(
-            model.StatusChoiceVisible,
+            True,
             "Status",
             StatusActivity.Launch(context, model, exitDialog))
     End Function

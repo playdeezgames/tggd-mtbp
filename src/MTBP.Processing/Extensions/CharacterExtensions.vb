@@ -56,7 +56,6 @@ Friend Module CharacterExtensions
     End Sub
     <Extension>
     Friend Sub ShowStatus(character As ICharacter)
-        character.SetView(Views.STATUS)
         character.AddMessage($"{character.GetName}'s Status:")
         character.AddMessage($"Health: {character.GetHealth}/{character.GetMaximumHealth}")
         character.AddMessage($"Satiety: {character.GetSatiety}/{character.GetMaximumSatiety}")
@@ -64,7 +63,6 @@ Friend Module CharacterExtensions
     End Sub
     <Extension>
     Sub Look(character As ICharacter)
-        character.SetView(Views.LOOK)
         If character.IsDead() Then
             character.AddMessage($"{character.GetName} is dead.")
             Return
@@ -92,7 +90,6 @@ Friend Module CharacterExtensions
     End Sub
     <Extension>
     Friend Sub Describe(character As ICharacter, feature As IFeature)
-        character.SetView(Views.FEATURE)
         character.AddMessage($"Inspecting {feature.GetName}:")
         character.AddMessage(feature.GetDescription())
         Dim items = feature.Inventory.Items

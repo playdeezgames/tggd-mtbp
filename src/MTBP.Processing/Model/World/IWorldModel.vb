@@ -9,8 +9,6 @@ Public Interface IWorldModel
     'TODO: view selection
     Sub ShowStatus()
     Sub Look()
-    ReadOnly Property StatusChoiceVisible As Boolean
-    ReadOnly Property LookChoiceVisible As Boolean
     'TODO: exit things!
     Sub Move(direction As String)
     ReadOnly Property CanMove As Boolean

@@ -59,18 +59,6 @@ Public Class WorldModel
         End Get
     End Property
 
-    Public ReadOnly Property StatusChoiceVisible As Boolean Implements IWorldModel.StatusChoiceVisible
-        Get
-            Return Entity.Avatar.GetView() <> Views.STATUS
-        End Get
-    End Property
-
-    Public ReadOnly Property LookChoiceVisible As Boolean Implements IWorldModel.LookChoiceVisible
-        Get
-            Return Entity.Avatar.GetView() <> Views.LOOK
-        End Get
-    End Property
-
     Public ReadOnly Property HasFeatures As Boolean Implements IWorldModel.HasFeatures
         Get
             Return Not Entity.Avatar.IsDead AndAlso Entity.Avatar.Location.HasFeatures
