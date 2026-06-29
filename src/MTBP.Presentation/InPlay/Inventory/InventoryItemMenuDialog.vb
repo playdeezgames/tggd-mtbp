@@ -20,7 +20,7 @@ Friend Class InventoryItemMenuDialog
     End Property
 
     Private Function ChooseDrop(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(True, "Drop", DropItemMenuDialog.Launch(context, model, exitDialog, ItemModel))
+        Return DialogChoice.Create(True, "Drop", DropItemActivity.Launch(context, model, exitDialog, ItemModel))
     End Function
 
     Private Function ChooseNeverMind(

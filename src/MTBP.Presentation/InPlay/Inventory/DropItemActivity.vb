@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Friend Class DropItemMenuDialog
+Friend Class DropItemActivity
     Inherits ExitableModelDialog(Of IDisplayContext, IWorldModel)
 
     Private ReadOnly ItemModel As IInventoryItemModel
@@ -12,7 +12,7 @@ Friend Class DropItemMenuDialog
     End Sub
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IInventoryItemModel) As DialogSource
-        Return Function() New DropItemMenuDialog(context, model, exitDialog, itemModel)
+        Return Function() New DropItemActivity(context, model, exitDialog, itemModel)
     End Function
 
     Public Overrides Function Run() As IDialogPrompt
@@ -21,6 +21,6 @@ Friend Class DropItemMenuDialog
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return New DropItemMenuDialog(Context, Model, ExitDialog, ItemModel)
+        Return New DropItemActivity(Context, Model, ExitDialog, ItemModel)
     End Function
 End Class

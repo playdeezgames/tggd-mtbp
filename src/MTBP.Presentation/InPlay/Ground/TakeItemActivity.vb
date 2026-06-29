@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Friend Class TakeItemMenuDialog
+Friend Class TakeItemActivity
     Inherits ExitableModelDialog(Of IDisplayContext, IWorldModel)
 
     Private Sub New(
@@ -16,7 +16,7 @@ Friend Class TakeItemMenuDialog
     Private ReadOnly ItemModel As IGroundItemModel
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IGroundItemModel) As DialogSource
-        Return Function() New TakeItemMenuDialog(context, model, exitDialog, itemModel)
+        Return Function() New TakeItemActivity(context, model, exitDialog, itemModel)
     End Function
 
     Public Overrides Function Run() As IDialogPrompt
@@ -25,6 +25,6 @@ Friend Class TakeItemMenuDialog
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return New TakeItemMenuDialog(Context, Model, ExitDialog, ItemModel)
+        Return New TakeItemActivity(Context, Model, ExitDialog, ItemModel)
     End Function
 End Class

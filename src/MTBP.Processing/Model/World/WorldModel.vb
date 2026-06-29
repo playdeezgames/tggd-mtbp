@@ -86,7 +86,7 @@ Public Class WorldModel
     Public Sub Embark() Implements IWorldModel.Embark
         Abandon()
         Entity.Initialize(InitializationContext.Create())
-        Entity.Avatar.Look()
+        Look()
     End Sub
 
     Public Sub Abandon() Implements IWorldModel.Abandon
@@ -98,6 +98,7 @@ Public Class WorldModel
     End Sub
 
     Public Sub Move(direction As String) Implements IWorldModel.Move
+        Entity.ClearMessages()
         Entity.AddMessage($"{Entity.Avatar.GetName()} moves {direction}.")
         Entity.Avatar.Location = Entity.Avatar.Location.Routes(direction).Destination
         Entity.Avatar.HandleToxicity()

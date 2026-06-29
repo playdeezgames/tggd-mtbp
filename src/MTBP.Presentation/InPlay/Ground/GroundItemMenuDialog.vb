@@ -20,7 +20,7 @@ Friend Class GroundItemMenuDialog
     End Property
 
     Private Function ChooseTake(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(True, "Take", TakeItemMenuDialog.Launch(context, model, exitDialog, ItemModel))
+        Return DialogChoice.Create(True, "Take", TakeItemActivity.Launch(context, model, exitDialog, ItemModel))
     End Function
 
     Private Function ChooseNeverMind(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice

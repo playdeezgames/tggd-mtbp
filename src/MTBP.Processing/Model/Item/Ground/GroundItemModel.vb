@@ -17,9 +17,10 @@ Friend Class GroundItemModel
 
     Public Sub Take() Implements IGroundItemModel.Take
         Dim world = Item.World
+        world.ClearMessages()
         Dim character = world.Avatar
         Item.Inventory = character.Inventory
-        character.AddMessage($"{character.GetName} takes the {Item.GetName}.")
+        character.AddMessage($"{character.GetName} takes {Item.GetName}.")
     End Sub
 
     Friend Shared Function Create(item As IItem) As IGroundItemModel
