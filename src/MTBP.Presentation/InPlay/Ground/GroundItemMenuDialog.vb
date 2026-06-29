@@ -2,7 +2,7 @@
 Imports TGGD.Presentation
 
 Friend Class GroundItemMenuDialog
-    Inherits PickerDialog
+    Inherits PickerMenu
 
     Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IItemModel)
         MyBase.New(context, model, exitDialog, $"What to do with {itemModel.Text}?")

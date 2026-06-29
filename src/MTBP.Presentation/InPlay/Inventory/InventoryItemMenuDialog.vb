@@ -2,7 +2,7 @@
 Imports TGGD.Presentation
 
 Friend Class InventoryItemMenuDialog
-    Inherits PickerDialog
+    Inherits PickerMenu
 
     Private ReadOnly ItemModel As IItemModel
 

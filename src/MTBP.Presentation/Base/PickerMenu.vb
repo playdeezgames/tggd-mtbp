@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Friend MustInherit Class PickerDialog
+Friend MustInherit Class PickerMenu
     Inherits ExitableModelDialog(Of IDisplayContext, IWorldModel)
     Friend Delegate Function LaunchDelegate(
                                      context As IDisplayContext,

@@ -2,7 +2,7 @@
 Imports TGGD.Presentation
 
 Friend Class MoveMenuDialog
-    Inherits PickerDialog
+    Inherits PickerMenu
 
     Public Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource)
         MyBase.New(context, model, exitDialog, "Move Which Way?")

@@ -2,7 +2,7 @@
 Imports TGGD.Presentation
 
 Friend Class FeaturePlaceItemMenu
-    Inherits PickerDialog
+    Inherits PickerMenu
 
     Private ReadOnly FeatureModel As IFeatureModel
 
