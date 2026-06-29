@@ -64,7 +64,7 @@ Friend Class NavigationDialog
     End Function
 
     Private Shared Function ChooseGameMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(True, "Game Menu", GameMenuDialog.Launch(context, model, exitDialog))
+        Return DialogChoice.Create(True, "Game Menu", GameMenu.Launch(context, model, exitDialog))
     End Function
 
     Protected Overrides Function Relaunch() As IDialog

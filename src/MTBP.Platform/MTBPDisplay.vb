@@ -15,7 +15,7 @@ Public Class MTBPDisplay
     End Sub
 
     Public Overrides Async Function Start() As Task
-        UpdateDialog(TitleDialog.Launch(Me, Await WorldModel.Create(quittable, persister), Function() Nothing).Invoke())
+        UpdateDialog(TitleMenu.Launch(Me, Await WorldModel.Create(quittable, persister), Function() Nothing).Invoke())
     End Function
 
     Public Shared Async Function Create(quittable As Boolean, persister As IPersister) As Task(Of IDisplay)

@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Public Class TitleDialog
+Public Class TitleMenu
     Inherits ExitableModelDialog(Of IDisplayContext, IWorldModel)
     Implements IDialog
 
@@ -13,14 +13,14 @@ Public Class TitleDialog
         Context.Render("Toxic City of SPLORR!!")
         Return DialogPrompt.CreateChoicePrompt(
             "",
-            DialogChoice.Create(True, "OK", MainMenuDialog.Launch(Context, Model, ExitDialog)))
+            DialogChoice.Create(True, "OK", MainMenu.Launch(Context, Model, ExitDialog)))
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return New TitleDialog(Context, Model, ExitDialog)
+        Return New TitleMenu(Context, Model, ExitDialog)
     End Function
 
     Public Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
-        Return Function() New TitleDialog(context, model, exitDialog)
+        Return Function() New TitleMenu(context, model, exitDialog)
     End Function
 End Class

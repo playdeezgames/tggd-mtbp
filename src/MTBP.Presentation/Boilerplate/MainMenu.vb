@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Friend Class MainMenuDialog
+Friend Class MainMenu
     Inherits ExitableModelDialog(Of IDisplayContext, IWorldModel)
 
     Public Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource)
@@ -9,7 +9,7 @@ Friend Class MainMenuDialog
     End Sub
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
-        Return Function() New MainMenuDialog(context, model, exitDialog)
+        Return Function() New MainMenu(context, model, exitDialog)
     End Function
 
     Public Overrides Function Run() As IDialogPrompt
@@ -20,6 +20,6 @@ Friend Class MainMenuDialog
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return New MainMenuDialog(Context, Model, ExitDialog)
+        Return New MainMenu(Context, Model, ExitDialog)
     End Function
 End Class
