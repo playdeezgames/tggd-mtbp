@@ -23,8 +23,4 @@ Friend Class TakeItemActivity
         ItemModel.Take()
         Return GroundMenu.Launch(Context, Model, ExitDialog).Invoke().Run()
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New TakeItemActivity(Context, Model, ExitDialog, ItemModel)
-    End Function
 End Class

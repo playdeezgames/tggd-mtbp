@@ -35,8 +35,4 @@ Friend Class InventoryMenu
                    Return LookActivity.Launch(context, model, exitDialog, False).Invoke()
                End Function
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New InventoryMenu(Context, Model, ExitDialog)
-    End Function
 End Class

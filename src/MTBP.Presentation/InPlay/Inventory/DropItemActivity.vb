@@ -19,8 +19,4 @@ Friend Class DropItemActivity
         ItemModel.Drop()
         Return InventoryMenu.Launch(Context, Model, ExitDialog).Invoke().Run()
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New DropItemActivity(Context, Model, ExitDialog, ItemModel)
-    End Function
 End Class

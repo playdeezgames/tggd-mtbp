@@ -16,10 +16,6 @@ Public Class TitleMenu
             DialogChoice.Create(True, "OK", MainMenu.Launch(Context, Model, ExitDialog)))
     End Function
 
-    Protected Overrides Function Relaunch() As IDialog
-        Return New TitleMenu(Context, Model, ExitDialog)
-    End Function
-
     Public Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
         Return Function() New TitleMenu(context, model, exitDialog)
     End Function

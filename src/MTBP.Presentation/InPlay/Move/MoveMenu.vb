@@ -32,8 +32,4 @@ Friend Class MoveMenu
     Private Shared Function ChooseCancel(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(True, "Cancel", NeutralActivity.Launch(context, model, exitDialog))
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Throw New NotImplementedException()
-    End Function
 End Class

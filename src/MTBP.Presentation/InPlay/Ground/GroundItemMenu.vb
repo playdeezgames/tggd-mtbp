@@ -30,8 +30,4 @@ Friend Class GroundItemMenu
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IItemModel) As DialogSource
         Return Function() New GroundItemMenu(context, model, exitDialog, itemModel)
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New GroundItemMenu(Context, Model, ExitDialog, ItemModel)
-    End Function
 End Class

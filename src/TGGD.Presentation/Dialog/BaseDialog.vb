@@ -6,5 +6,4 @@
     End Sub
 
     Public MustOverride Function Run() As IDialogPrompt Implements IDialog.Run
-    Protected MustOverride Function Relaunch() As IDialog
 End Class

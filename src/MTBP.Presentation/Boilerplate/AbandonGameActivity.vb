@@ -16,8 +16,4 @@ Friend Class AbandonGameActivity
         Model.Abandon()
         Return MainMenu.Launch(Context, Model, ExitDialog).Invoke().Run()
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New AbandonGameActivity(Context, Model, ExitDialog)
-    End Function
 End Class

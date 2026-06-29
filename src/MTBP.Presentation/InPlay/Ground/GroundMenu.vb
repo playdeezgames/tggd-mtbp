@@ -32,8 +32,4 @@ Friend Class GroundMenu
                    Return NeutralActivity.Launch(context, model, exitDialog).Invoke()
                End Function
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New GroundMenu(Context, Model, ExitDialog)
-    End Function
 End Class

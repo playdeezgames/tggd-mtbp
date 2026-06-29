@@ -19,8 +19,4 @@ Friend Class LookActivity
         Model.Views.ShowLocation(ClearMessages)
         Return NeutralActivity.Launch(Context, Model, ExitDialog).Invoke().Run
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New LookActivity(Context, Model, ExitDialog, ClearMessages)
-    End Function
 End Class

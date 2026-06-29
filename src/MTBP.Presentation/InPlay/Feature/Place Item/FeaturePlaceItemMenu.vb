@@ -30,8 +30,4 @@ Friend Class FeaturePlaceItemMenu
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, featureModel As IFeatureModel) As DialogSource
         Return Function() New FeaturePlaceItemMenu(context, model, exitDialog, featureModel)
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New FeaturePlaceItemMenu(Context, Model, ExitDialog, FeatureModel)
-    End Function
 End Class

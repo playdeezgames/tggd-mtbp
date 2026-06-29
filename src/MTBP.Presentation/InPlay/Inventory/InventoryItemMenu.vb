@@ -30,10 +30,6 @@ Friend Class InventoryItemMenu
         Return DialogChoice.Create(True, "Never Mind", InventoryMenu.Launch(context, model, exitDialog))
     End Function
 
-    Protected Overrides Function Relaunch() As IDialog
-        Return New InventoryItemMenu(Context, Model, ExitDialog, ItemModel)
-    End Function
-
     Friend Shared Function Launch(c As IDisplayContext, m As IWorldModel, e As DialogSource, itemModel As IItemModel) As DialogSource
         Return Function() New InventoryItemMenu(c, m, e, itemModel)
     End Function

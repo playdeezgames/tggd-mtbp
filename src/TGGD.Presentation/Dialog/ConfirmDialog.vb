@@ -24,14 +24,6 @@
         Return Function() New ConfirmDialog(Of TContext)(context, text, onConfirmDialog, onCancelDialog)
     End Function
 
-    Protected Overrides Function Relaunch() As IDialog
-        Return Launch(
-            Context,
-            Text,
-            OnConfirmDialog,
-            OnCancelDialog).Invoke
-    End Function
-
     Public Overrides Function Run() As IDialogPrompt
         Return DialogPrompt.CreateChoicePrompt(
             Text,

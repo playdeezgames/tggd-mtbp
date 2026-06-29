@@ -16,10 +16,6 @@ Friend Class MainMenu
         Return DialogPrompt.CreateChoicePrompt(
             "Main Menu:",
             DialogChoice.Create(True, "Embark!", EmbarkActivity.Launch(Context, Model, ExitDialog)),
-            DialogChoice.Create(Model.IsQuittable, "Quit", ConfirmDialog(Of IDisplayContext).Launch(Context, "Are you sure you want to quit?", ExitDialog, AddressOf Relaunch)))
-    End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New MainMenu(Context, Model, ExitDialog)
+            DialogChoice.Create(Model.IsQuittable, "Quit", ConfirmDialog(Of IDisplayContext).Launch(Context, "Are you sure you want to quit?", ExitDialog, Launch(Context, Model, ExitDialog))))
     End Function
 End Class

@@ -16,8 +16,4 @@ Friend Class EmbarkActivity
         Model.Embark()
         Return NeutralActivity.Launch(Context, Model, ExitDialog).Invoke().Run()
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New EmbarkActivity(Context, Model, ExitDialog)
-    End Function
 End Class

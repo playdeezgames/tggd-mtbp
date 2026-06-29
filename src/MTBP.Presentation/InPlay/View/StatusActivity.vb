@@ -16,8 +16,4 @@ Friend Class StatusActivity
         Model.Views.ShowStatus()
         Return NeutralActivity.Launch(Context, Model, ExitDialog).Invoke().Run
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New StatusActivity(Context, Model, ExitDialog)
-    End Function
 End Class

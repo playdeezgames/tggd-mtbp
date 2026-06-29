@@ -15,8 +15,4 @@ Friend Class NeutralActivity
     Public Overrides Function Run() As IDialogPrompt
         Return NavigationMenu.Launch(Context, Model, ExitDialog).Invoke().Run()
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New NeutralActivity(Context, Model, ExitDialog)
-    End Function
 End Class

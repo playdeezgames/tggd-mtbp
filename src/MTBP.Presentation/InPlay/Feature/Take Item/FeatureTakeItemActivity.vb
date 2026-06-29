@@ -21,8 +21,4 @@ Friend Class FeatureTakeItemActivity
         ItemModel.Take()
         Return FeatureMenu.Launch(Context, Model, ExitDialog, FeatureModel).Invoke().Run()
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New FeatureTakeItemActivity(Context, Model, ExitDialog, FeatureModel, ItemModel)
-    End Function
 End Class

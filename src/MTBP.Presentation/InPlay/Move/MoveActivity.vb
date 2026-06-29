@@ -19,8 +19,4 @@ Friend Class MoveActivity
         Model.Exits.Move(Direction)
         Return LookActivity.Launch(Context, Model, ExitDialog, False).Invoke().Run()
     End Function
-
-    Protected Overrides Function Relaunch() As IDialog
-        Return New MoveActivity(Context, Model, ExitDialog, Direction)
-    End Function
 End Class
