@@ -4,12 +4,12 @@ Imports TGGD.Presentation
 Friend Class GroundItemMenuDialog
     Inherits PickerDialog
 
-    Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IGroundItemModel)
+    Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IInventoryItemModel)
         MyBase.New(context, model, exitDialog, $"What to do with {itemModel.Text}?")
         Me.ItemModel = itemModel
     End Sub
 
-    Public ReadOnly Property ItemModel As IGroundItemModel
+    Public ReadOnly Property ItemModel As IInventoryItemModel
 
     Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelegate)
         Get
@@ -27,7 +27,7 @@ Friend Class GroundItemMenuDialog
         Return DialogChoice.Create(True, "Never Mind", GroundMenuDialog.Launch(context, model, exitDialog))
     End Function
 
-    Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IGroundItemModel) As DialogSource
+    Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IInventoryItemModel) As DialogSource
         Return Function() New GroundItemMenuDialog(context, model, exitDialog, itemModel)
     End Function
 

@@ -16,7 +16,7 @@ Friend Class GroundMenuDialog
         End Get
     End Property
 
-    Private Function ChooseItem(itemModel As IGroundItemModel) As LaunchDelegate
+    Private Function ChooseItem(itemModel As IInventoryItemModel) As LaunchDelegate
         Return Function(c, m, e) DialogChoice.Create(True, itemModel.Text, GroundItemMenuDialog.Launch(c, m, e, itemModel))
     End Function
 

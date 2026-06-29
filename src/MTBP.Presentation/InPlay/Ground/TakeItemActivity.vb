@@ -8,14 +8,14 @@ Friend Class TakeItemActivity
                    context As IDisplayContext,
                    model As IWorldModel,
                    exitDialog As DialogSource,
-                   itemModel As IGroundItemModel)
+                   itemModel As IInventoryItemModel)
         MyBase.New(context, model, exitDialog)
         Me.ItemModel = itemModel
     End Sub
 
-    Private ReadOnly ItemModel As IGroundItemModel
+    Private ReadOnly ItemModel As IInventoryItemModel
 
-    Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IGroundItemModel) As DialogSource
+    Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IInventoryItemModel) As DialogSource
         Return Function() New TakeItemActivity(context, model, exitDialog, itemModel)
     End Function
 

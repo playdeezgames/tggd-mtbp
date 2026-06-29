@@ -17,7 +17,7 @@ Public Interface IWorldModel
     ReadOnly Property Exits As IEnumerable(Of IExitModel)
     'TODO: ground item things!
     ReadOnly Property HasGroundItems As Boolean
-    ReadOnly Property GroundItems As IEnumerable(Of IGroundItemModel)
+    ReadOnly Property GroundItems As IEnumerable(Of IInventoryItemModel)
     'TODO: inventory things!
     ReadOnly Property HasItems As Boolean
     ReadOnly Property InventoryItems As IEnumerable(Of IInventoryItemModel)
