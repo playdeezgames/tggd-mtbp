@@ -11,7 +11,6 @@ Friend Class FeatureModel
     End Function
 
     Public Sub Describe() Implements IFeatureModel.Describe
-        feature.World.ClearMessages()
         feature.World.Avatar.Describe(feature)
     End Sub
 
@@ -21,5 +20,5 @@ Friend Class FeatureModel
         End Get
     End Property
 
-    Private ReadOnly feature As IFeature
+    Friend ReadOnly feature As IFeature
 End Class

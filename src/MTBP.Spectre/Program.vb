@@ -54,8 +54,10 @@ Module Program
         prompt.Respond(counter:=AnsiConsole.Prompt(selectionPrompt))
     End Sub
 
+#Disable Warning CA1859 ' Use concrete types when possible for improved performance
     Private ReadOnly moodColors As IReadOnlyDictionary(Of String, String) =
         New Dictionary(Of String, String) From {}
+#Enable Warning CA1859 ' Use concrete types when possible for improved performance
 
     Private Sub RenderElement(element As IDisplayElement)
         Dim colorName As String = Nothing

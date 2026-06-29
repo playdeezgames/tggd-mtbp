@@ -24,6 +24,15 @@ Friend Class InventoryItemModel
         character.Look()
     End Sub
 
+    Public Sub Place(featureModel As IFeatureModel) Implements IInventoryItemModel.Place
+        Dim feature = featureModel.GetFeature()
+        Dim world = Item.World
+        world.ClearMessages()
+        Dim character = world.Avatar
+        character.AddMessage($"{character.GetName()} places {Item.GetName()} on {feature.GetName()}.")
+        Item.Inventory = feature.Inventory
+    End Sub
+
     Friend Shared Function Create(item As IItem) As IInventoryItemModel
         Return New InventoryItemModel(item)
     End Function

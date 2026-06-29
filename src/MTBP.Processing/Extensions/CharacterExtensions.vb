@@ -92,6 +92,9 @@ Friend Module CharacterExtensions
     End Sub
     <Extension>
     Friend Sub Describe(character As ICharacter, feature As IFeature)
+        If Not character.GetView() = Views.FEATURE Then
+            feature.World.ClearMessages()
+        End If
         character.SetView(Views.FEATURE)
         character.AddMessage($"Inspecting {feature.GetName}:")
         character.AddMessage(feature.GetDescription())

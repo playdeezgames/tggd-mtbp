@@ -14,9 +14,20 @@ Friend Class FeatureMenuDialog
     Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
         Get
             Return Enumerable.Empty(Of LaunchDelgate).
-                Append(AddressOf ChooseNeverMind)
+                Append(AddressOf ChooseNeverMind).
+                Append(AddressOf ChoosePlaceItem)
         End Get
     End Property
+
+    Private Function ChoosePlaceItem(
+                                    context As IDisplayContext,
+                                    model As IWorldModel,
+                                    exitDialog As DialogSource) As IDialogChoice
+        Return DialogChoice.Create(
+            model.HasItems,
+            "Place Item...",
+            FeaturePlaceItemsMenuDialog.Launch(context, model, exitDialog, FeatureModel))
+    End Function
 
     Public Overrides Function Run() As IDialogPrompt
         FeatureModel.Describe()
