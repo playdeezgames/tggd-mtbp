@@ -40,21 +40,21 @@ Friend Class NavigationMenu
 
     Private Function ChooseGroundMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(
-            model.HasGroundItems,
+            model.LegacyHasGroundItems,
             "Ground...",
             GroundMenu.Launch(context, model, exitDialog))
     End Function
 
     Private Function ChooseInventoryMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(
-            model.HasItems,
+            model.LegacyHasItems,
             "Inventory...",
             InventoryMenu.Launch(context, model, exitDialog))
     End Function
 
     Private Function ChooseFeatureMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(
-            model.HasFeatures,
+            model.Features.HasAny,
             "Feature...",
             FeaturesMenu.Launch(context, model, exitDialog))
     End Function

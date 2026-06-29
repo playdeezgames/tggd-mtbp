@@ -12,7 +12,7 @@ Friend Class FeaturesMenu
         Get
             Return Enumerable.Empty(Of LaunchDelegate).
                 Append(AddressOf ChooseNeverMind).
-                Concat(Model.Features.Select(AddressOf ChooseFeature))
+                Concat(Model.Features.All.Select(AddressOf ChooseFeature))
         End Get
     End Property
     Private Function ChooseFeature(featureModel As IFeatureModel) As LaunchDelegate
@@ -28,7 +28,7 @@ Friend Class FeaturesMenu
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
         Return Function()
-                   If model.HasFeatures Then
+                   If model.Features.HasAny Then
                        Return New FeaturesMenu(context, model, exitDialog)
                    End If
                    Return LookActivity.Launch(context, model, exitDialog, False).Invoke()

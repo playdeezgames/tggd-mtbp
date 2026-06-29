@@ -12,7 +12,7 @@ Friend Class InventoryMenu
         Get
             Return Enumerable.Empty(Of LaunchDelegate).
                 Append(AddressOf ChooseNeverMind).
-                Concat(Model.InventoryItems.Select(AddressOf ChooseItem))
+                Concat(Model.LegacyInventoryItems.Select(AddressOf ChooseItem))
         End Get
     End Property
 
@@ -29,7 +29,7 @@ Friend Class InventoryMenu
                                  model As IWorldModel,
                                  exitDialog As DialogSource) As DialogSource
         Return Function()
-                   If model.HasItems Then
+                   If model.LegacyHasItems Then
                        Return New InventoryMenu(context, model, exitDialog)
                    End If
                    Return LookActivity.Launch(context, model, exitDialog, False).Invoke()

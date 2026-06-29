@@ -8,13 +8,13 @@ Public Interface IWorldModel
     ReadOnly Property Messages As IEnumerable(Of String)
     ReadOnly Property Views As IViewsModel
     ReadOnly Property Exits As IExitsModel
+    ReadOnly Property Ground As IGroundModel
+    ReadOnly Property Inventory As IInventoryModel
+    ReadOnly Property Features As IFeaturesModel
     'TODO: ground item things!
-    ReadOnly Property HasGroundItems As Boolean
-    ReadOnly Property GroundItems As IEnumerable(Of IItemModel)
+    ReadOnly Property LegacyHasGroundItems As Boolean
+    ReadOnly Property LegacyGroundItems As IEnumerable(Of IItemModel)
     'TODO: inventory things!
-    ReadOnly Property HasItems As Boolean
-    ReadOnly Property InventoryItems As IEnumerable(Of IItemModel)
-    'TODO: feature things!
-    ReadOnly Property HasFeatures As Boolean
-    ReadOnly Property Features As IEnumerable(Of IFeatureModel)
+    ReadOnly Property LegacyHasItems As Boolean
+    ReadOnly Property LegacyInventoryItems As IEnumerable(Of IItemModel)
 End Interface

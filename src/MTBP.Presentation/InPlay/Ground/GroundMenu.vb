@@ -12,7 +12,7 @@ Friend Class GroundMenu
         Get
             Return Enumerable.Empty(Of LaunchDelegate).
                 Append(AddressOf ChooseNeverMind).
-                Concat(Model.GroundItems.Select(AddressOf ChooseItem))
+                Concat(Model.LegacyGroundItems.Select(AddressOf ChooseItem))
         End Get
     End Property
 
@@ -26,7 +26,7 @@ Friend Class GroundMenu
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
         Return Function()
-                   If model.HasGroundItems Then
+                   If model.LegacyHasGroundItems Then
                        Return New GroundMenu(context, model, exitDialog)
                    End If
                    Return NeutralActivity.Launch(context, model, exitDialog).Invoke()
