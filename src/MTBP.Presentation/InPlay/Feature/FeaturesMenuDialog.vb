@@ -8,14 +8,14 @@ Friend Class FeaturesMenuDialog
         MyBase.New(context, model, exitDialog, "Which Feature?")
     End Sub
 
-    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
+    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelegate)
         Get
-            Return Enumerable.Empty(Of LaunchDelgate).
+            Return Enumerable.Empty(Of LaunchDelegate).
                 Append(AddressOf ChooseNeverMind).
                 Concat(Model.Features.Select(AddressOf ChooseFeature))
         End Get
     End Property
-    Private Function ChooseFeature(featureModel As IFeatureModel) As LaunchDelgate
+    Private Function ChooseFeature(featureModel As IFeatureModel) As LaunchDelegate
         Return Function(c, m, e) DialogChoice.Create(True, featureModel.Text, FeatureMenuDialog.Launch(c, m, e, featureModel))
     End Function
 

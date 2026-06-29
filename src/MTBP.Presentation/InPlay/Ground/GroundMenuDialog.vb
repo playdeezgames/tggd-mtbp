@@ -8,15 +8,15 @@ Friend Class GroundMenuDialog
         MyBase.New(context, model, exitDialog, "Items on Ground:")
     End Sub
 
-    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
+    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelegate)
         Get
-            Return Enumerable.Empty(Of LaunchDelgate).
+            Return Enumerable.Empty(Of LaunchDelegate).
                 Append(AddressOf ChooseNeverMind).
                 Concat(Model.GroundItems.Select(AddressOf ChooseItem))
         End Get
     End Property
 
-    Private Function ChooseItem(itemModel As IGroundItemModel) As LaunchDelgate
+    Private Function ChooseItem(itemModel As IGroundItemModel) As LaunchDelegate
         Return Function(c, m, e) DialogChoice.Create(True, itemModel.Text, GroundItemMenuDialog.Launch(c, m, e, itemModel))
     End Function
 

@@ -17,20 +17,24 @@ Friend Class InventoryItemModel
 
     Public Sub Drop() Implements IInventoryItemModel.Drop
         Dim world = Item.World
-        world.ClearMessages()
         Dim character = world.Avatar
         Item.Inventory = character.Location.Inventory
         character.AddMessage($"{character.GetName} drops {Item.GetName}.")
-        character.Look()
     End Sub
 
     Public Sub Place(featureModel As IFeatureModel) Implements IInventoryItemModel.Place
         Dim feature = featureModel.GetFeature()
         Dim world = Item.World
-        world.ClearMessages()
         Dim character = world.Avatar
         character.AddMessage($"{character.GetName()} places {Item.GetName()} on {feature.GetName()}.")
         Item.Inventory = feature.Inventory
+    End Sub
+
+    Public Sub Take() Implements IInventoryItemModel.Take
+        Dim world = Item.World
+        Dim character = world.Avatar
+        Item.Inventory = character.Inventory
+        character.AddMessage($"{character.GetName} takes the {Item.GetName}.")
     End Sub
 
     Friend Shared Function Create(item As IItem) As IInventoryItemModel

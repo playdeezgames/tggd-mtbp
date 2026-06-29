@@ -8,9 +8,9 @@ Friend Class InventoryMenuDialog
         MyBase.New(context, model, exitDialog, "Items in Inventory:")
     End Sub
 
-    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
+    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelegate)
         Get
-            Return Enumerable.Empty(Of LaunchDelgate).
+            Return Enumerable.Empty(Of LaunchDelegate).
                 Append(AddressOf ChooseNeverMind).
                 Concat(Model.InventoryItems.Select(AddressOf ChooseItem))
         End Get
@@ -20,7 +20,7 @@ Friend Class InventoryMenuDialog
         Return DialogChoice.Create(True, "Never Mind", NeutralDialog.Launch(context, model, exitDialog))
     End Function
 
-    Private Function ChooseItem(itemModel As IInventoryItemModel) As LaunchDelgate
+    Private Function ChooseItem(itemModel As IInventoryItemModel) As LaunchDelegate
         Return Function(c, m, e) DialogChoice.Create(True, itemModel.Text, InventoryItemMenuDialog.Launch(c, m, e, itemModel))
     End Function
 

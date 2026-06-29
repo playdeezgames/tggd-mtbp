@@ -19,9 +19,7 @@ Friend Class GroundItemModel
         Dim world = Item.World
         Dim character = world.Avatar
         Item.Inventory = character.Inventory
-        world.ClearMessages()
         character.AddMessage($"{character.GetName} takes the {Item.GetName}.")
-        character.Look()
     End Sub
 
     Friend Shared Function Create(item As IItem) As IGroundItemModel

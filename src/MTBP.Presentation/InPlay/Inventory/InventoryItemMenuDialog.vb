@@ -11,9 +11,9 @@ Friend Class InventoryItemMenuDialog
         Me.ItemModel = itemModel
     End Sub
 
-    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
+    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelegate)
         Get
-            Return Enumerable.Empty(Of LaunchDelgate).
+            Return Enumerable.Empty(Of LaunchDelegate).
                 Append(AddressOf ChooseNeverMind).
                 Append(AddressOf ChooseDrop)
         End Get

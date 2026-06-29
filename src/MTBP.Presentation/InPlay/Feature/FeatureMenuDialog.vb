@@ -11,13 +11,24 @@ Friend Class FeatureMenuDialog
         Me.FeatureModel = featureModel
     End Sub
 
-    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
+    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelegate)
         Get
-            Return Enumerable.Empty(Of LaunchDelgate).
+            Return Enumerable.Empty(Of LaunchDelegate).
                 Append(AddressOf ChooseNeverMind).
-                Append(AddressOf ChoosePlaceItem)
+                Append(AddressOf ChoosePlaceItem).
+                Append(AddressOf ChooseTakeItem)
         End Get
     End Property
+
+    Private Function ChooseTakeItem(
+                                   context As IDisplayContext,
+                                   model As IWorldModel,
+                                   exitDialog As DialogSource) As IDialogChoice
+        Return DialogChoice.Create(
+            FeatureModel.HasItems,
+            "Take Item...",
+            FeatureTakeItemsMenuDialog.Launch(context, model, exitDialog, FeatureModel))
+    End Function
 
     Private Function ChoosePlaceItem(
                                     context As IDisplayContext,

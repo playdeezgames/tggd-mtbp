@@ -98,21 +98,17 @@ Public Class WorldModel
     End Sub
 
     Public Sub Move(direction As String) Implements IWorldModel.Move
-        Entity.ClearMessages()
         Entity.AddMessage($"{Entity.Avatar.GetName()} moves {direction}.")
         Entity.Avatar.Location = Entity.Avatar.Location.Routes(direction).Destination
         Entity.Avatar.HandleToxicity()
         Entity.Avatar.HandleHunger()
-        Entity.Avatar.Look()
     End Sub
 
     Public Sub ShowStatus() Implements IWorldModel.ShowStatus
-        Entity.ClearMessages()
         Entity.Avatar.ShowStatus()
     End Sub
 
     Public Sub Look() Implements IWorldModel.Look
-        Entity.ClearMessages()
         Entity.Avatar.Look()
     End Sub
 

@@ -3,7 +3,7 @@ Imports TGGD.Presentation
 
 Friend MustInherit Class PickerDialog
     Inherits ExitableModelDialog(Of IDisplayContext, IWorldModel)
-    Friend Delegate Function LaunchDelgate(
+    Friend Delegate Function LaunchDelegate(
                                      context As IDisplayContext,
                                      model As IWorldModel,
                                      exitDialog As DialogSource) As IDialogChoice
@@ -15,7 +15,7 @@ Friend MustInherit Class PickerDialog
         Me.PromptText = promptText
     End Sub
 
-    Protected MustOverride ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
+    Protected MustOverride ReadOnly Property Launchers As IEnumerable(Of LaunchDelegate)
 
     Public Overrides Function Run() As IDialogPrompt
         For Each message In Model.Messages

@@ -8,9 +8,9 @@ Friend Class MoveMenuDialog
         MyBase.New(context, model, exitDialog, "Move Which Way?")
     End Sub
 
-    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelgate)
+    Protected Overrides ReadOnly Property Launchers As IEnumerable(Of LaunchDelegate)
         Get
-            Dim choices As New List(Of LaunchDelgate) From
+            Dim choices As New List(Of LaunchDelegate) From
                 {
                     AddressOf ChooseCancel
                 }
@@ -19,7 +19,7 @@ Friend Class MoveMenuDialog
         End Get
     End Property
 
-    Private Function MakeExitChoice(exitModel As IExitModel) As LaunchDelgate
+    Private Function MakeExitChoice(exitModel As IExitModel) As LaunchDelegate
         Return Function(c, m, e)
                    Return DialogChoice.Create(True, exitModel.Text, MoveActivity.Launch(c, m, e, exitModel.Direction))
                End Function
