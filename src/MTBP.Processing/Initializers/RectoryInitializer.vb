@@ -25,7 +25,14 @@ Friend Module RectoryInitializer
                    character.SetCounter(Counters.SATIETY, MAXIMUM_SATIETY)
                    character.SetCounterMaximum(Counters.SATIETY, MAXIMUM_SATIETY)
                    character.SetCounterMinimum(Counters.SATIETY, MINIMUM_SATIETY)
+                   If context.IsDebug Then
+                       character.Inventory.CreateItem(AddressOf InitializeDeezNuts)
+                   End If
                End Sub
     End Function
 
+    Private Sub InitializeDeezNuts(item As IItem)
+        item.SetName("Deeznuts")
+        item.SetDescription("These are nuts. Which nuts are they? Deez. Hold them gently.")
+    End Sub
 End Module

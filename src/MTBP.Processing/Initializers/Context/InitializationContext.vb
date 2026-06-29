@@ -14,6 +14,16 @@ Friend Class InitializationContext
 
     Public Property Church As ILocation Implements IInitializationContext.Church
 
+    Public ReadOnly Property IsDebug As Boolean Implements IInitializationContext.IsDebug
+        Get
+#If DEBUG Then
+            Return True
+#Else
+            Return False    
+#End If
+        End Get
+    End Property
+
     Friend Shared Function Create() As IInitializationContext
         Return New InitializationContext()
     End Function
