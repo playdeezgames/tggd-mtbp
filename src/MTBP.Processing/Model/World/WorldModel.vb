@@ -40,9 +40,9 @@ Public Class WorldModel
         End Get
     End Property
 
-    Public ReadOnly Property GroundItems As IEnumerable(Of IInventoryItemModel) Implements IWorldModel.GroundItems
+    Public ReadOnly Property GroundItems As IEnumerable(Of IItemModel) Implements IWorldModel.GroundItems
         Get
-            Return Entity.Avatar.Location.Inventory.Items.Select(AddressOf InventoryItemModel.Create)
+            Return Entity.Avatar.Location.Inventory.Items.Select(AddressOf ItemModel.Create)
         End Get
     End Property
 
@@ -52,9 +52,9 @@ Public Class WorldModel
         End Get
     End Property
 
-    Public ReadOnly Property InventoryItems As IEnumerable(Of IInventoryItemModel) Implements IWorldModel.InventoryItems
+    Public ReadOnly Property InventoryItems As IEnumerable(Of IItemModel) Implements IWorldModel.InventoryItems
         Get
-            Return Entity.Avatar.Inventory.Items.Select(AddressOf InventoryItemModel.Create)
+            Return Entity.Avatar.Inventory.Items.Select(AddressOf ItemModel.Create)
 
         End Get
     End Property

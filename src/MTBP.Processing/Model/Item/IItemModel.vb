@@ -1,4 +1,4 @@
-﻿Public Interface IInventoryItemModel
+﻿Public Interface IItemModel
     ReadOnly Property Text As String
     Sub Drop()
     Sub Place(featureModel As IFeatureModel)

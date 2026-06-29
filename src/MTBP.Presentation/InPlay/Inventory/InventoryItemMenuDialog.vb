@@ -4,9 +4,9 @@ Imports TGGD.Presentation
 Friend Class InventoryItemMenuDialog
     Inherits PickerDialog
 
-    Private ReadOnly ItemModel As IInventoryItemModel
+    Private ReadOnly ItemModel As IItemModel
 
-    Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IInventoryItemModel)
+    Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IItemModel)
         MyBase.New(context, model, exitDialog, $"What to do with {itemModel.Text}?")
         Me.ItemModel = itemModel
     End Sub
@@ -34,7 +34,7 @@ Friend Class InventoryItemMenuDialog
         Return New InventoryItemMenuDialog(Context, Model, ExitDialog, ItemModel)
     End Function
 
-    Friend Shared Function Launch(c As IDisplayContext, m As IWorldModel, e As DialogSource, itemModel As IInventoryItemModel) As DialogSource
+    Friend Shared Function Launch(c As IDisplayContext, m As IWorldModel, e As DialogSource, itemModel As IItemModel) As DialogSource
         Return Function() New InventoryItemMenuDialog(c, m, e, itemModel)
     End Function
 End Class

@@ -20,7 +20,7 @@ Friend Class InventoryMenuDialog
         Return DialogChoice.Create(True, "Never Mind", NeutralDialog.Launch(context, model, exitDialog))
     End Function
 
-    Private Function ChooseItem(itemModel As IInventoryItemModel) As LaunchDelegate
+    Private Function ChooseItem(itemModel As IItemModel) As LaunchDelegate
         Return Function(c, m, e) DialogChoice.Create(True, itemModel.Text, InventoryItemMenuDialog.Launch(c, m, e, itemModel))
     End Function
 

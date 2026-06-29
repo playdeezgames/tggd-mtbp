@@ -1,13 +1,13 @@
 ﻿Imports MTBP.Persistence
 
-Friend Class InventoryItemModel
-    Implements IInventoryItemModel
+Friend Class ItemModel
+    Implements IItemModel
 
     Private Sub New(item As IItem)
         Me.Item = item
     End Sub
 
-    Public ReadOnly Property Text As String Implements IInventoryItemModel.Text
+    Public ReadOnly Property Text As String Implements IItemModel.Text
         Get
             Return Item.GetName()
         End Get
@@ -15,7 +15,7 @@ Friend Class InventoryItemModel
 
     Public ReadOnly Property Item As IItem
 
-    Public Sub Drop() Implements IInventoryItemModel.Drop
+    Public Sub Drop() Implements IItemModel.Drop
         Dim world = Item.World
         world.ClearMessages()
         Dim character = world.Avatar
@@ -23,7 +23,7 @@ Friend Class InventoryItemModel
         character.AddMessage($"{character.GetName} drops {Item.GetName}.")
     End Sub
 
-    Public Sub Place(featureModel As IFeatureModel) Implements IInventoryItemModel.Place
+    Public Sub Place(featureModel As IFeatureModel) Implements IItemModel.Place
         Dim feature = featureModel.GetFeature()
         Dim world = Item.World
         world.ClearMessages()
@@ -32,7 +32,7 @@ Friend Class InventoryItemModel
         Item.Inventory = feature.Inventory
     End Sub
 
-    Public Sub Take() Implements IInventoryItemModel.Take
+    Public Sub Take() Implements IItemModel.Take
         Dim world = Item.World
         world.ClearMessages()
         Dim character = world.Avatar
@@ -40,8 +40,8 @@ Friend Class InventoryItemModel
         character.AddMessage($"{character.GetName} takes {Item.GetName}.")
     End Sub
 
-    Friend Shared Function Create(item As IItem) As IInventoryItemModel
-        Return New InventoryItemModel(item)
+    Friend Shared Function Create(item As IItem) As IItemModel
+        Return New ItemModel(item)
     End Function
 
 End Class

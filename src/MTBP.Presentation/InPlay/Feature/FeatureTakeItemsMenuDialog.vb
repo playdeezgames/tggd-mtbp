@@ -19,7 +19,7 @@ Friend Class FeatureTakeItemsMenuDialog
         End Get
     End Property
 
-    Private Function ChooseItem(itemModel As IInventoryItemModel) As LaunchDelegate
+    Private Function ChooseItem(itemModel As IItemModel) As LaunchDelegate
         Return Function(c, m, e) DialogChoice.Create(True, itemModel.Text, FeatureTakeItemActivity.Launch(c, m, e, FeatureModel, itemModel))
     End Function
 
