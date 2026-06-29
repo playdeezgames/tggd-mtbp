@@ -9,15 +9,15 @@ Friend Class InventoryModel
         MyBase.New(entity)
     End Sub
 
-    Public ReadOnly Property LegacyHasItems As Boolean Implements IInventoryModel.LegacyHasItems
+    Public ReadOnly Property HasItems As Boolean Implements IInventoryModel.HasItems
         Get
-            Throw New NotImplementedException()
+            Return Not Entity.Avatar.IsDead AndAlso Entity.Avatar.Inventory.HasItems
         End Get
     End Property
 
-    Public ReadOnly Property LegacyInventoryItems As IEnumerable(Of IItemModel) Implements IInventoryModel.LegacyInventoryItems
+    Public ReadOnly Property Items As IEnumerable(Of IItemModel) Implements IInventoryModel.Items
         Get
-            Throw New NotImplementedException()
+            Return Entity.Avatar.Inventory.Items.Select(AddressOf ItemModel.Create)
         End Get
     End Property
 

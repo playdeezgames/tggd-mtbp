@@ -2,6 +2,6 @@
 
 Public Interface IInventoryModel
     Inherits IModel
-    ReadOnly Property LegacyHasItems As Boolean
-    ReadOnly Property LegacyInventoryItems As IEnumerable(Of IItemModel)
+    ReadOnly Property HasItems As Boolean
+    ReadOnly Property Items As IEnumerable(Of IItemModel)
 End Interface

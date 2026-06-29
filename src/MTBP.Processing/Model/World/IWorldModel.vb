@@ -11,10 +11,4 @@ Public Interface IWorldModel
     ReadOnly Property Ground As IGroundModel
     ReadOnly Property Inventory As IInventoryModel
     ReadOnly Property Features As IFeaturesModel
-    'TODO: ground item things!
-    ReadOnly Property LegacyHasGroundItems As Boolean
-    ReadOnly Property LegacyGroundItems As IEnumerable(Of IItemModel)
-    'TODO: inventory things!
-    ReadOnly Property LegacyHasItems As Boolean
-    ReadOnly Property LegacyInventoryItems As IEnumerable(Of IItemModel)
 End Interface

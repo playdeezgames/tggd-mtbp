@@ -2,6 +2,6 @@
 
 Public Interface IGroundModel
     Inherits IModel
-    ReadOnly Property LegacyHasGroundItems As Boolean
-    ReadOnly Property LegacyGroundItems As IEnumerable(Of IItemModel)
+    ReadOnly Property HasItems As Boolean
+    ReadOnly Property Items As IEnumerable(Of IItemModel)
 End Interface

@@ -35,7 +35,7 @@ Friend Class FeatureMenu
                                     model As IWorldModel,
                                     exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(
-            model.LegacyHasItems,
+            model.Inventory.HasItems,
             "Place Item...",
             FeaturePlaceItemMenu.Launch(context, model, exitDialog, FeatureModel))
     End Function

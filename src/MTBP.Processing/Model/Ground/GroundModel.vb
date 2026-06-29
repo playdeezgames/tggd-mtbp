@@ -9,15 +9,15 @@ Friend Class GroundModel
         MyBase.New(entity)
     End Sub
 
-    Public ReadOnly Property LegacyHasGroundItems As Boolean Implements IGroundModel.LegacyHasGroundItems
+    Public ReadOnly Property HasItems As Boolean Implements IGroundModel.HasItems
         Get
-            Throw New NotImplementedException()
+            Return Not Entity.Avatar.IsDead AndAlso Entity.Avatar.Location.Inventory.HasItems
         End Get
     End Property
 
-    Public ReadOnly Property LegacyGroundItems As IEnumerable(Of IItemModel) Implements IGroundModel.LegacyGroundItems
+    Public ReadOnly Property Items As IEnumerable(Of IItemModel) Implements IGroundModel.Items
         Get
-            Throw New NotImplementedException()
+            Return Entity.Avatar.Location.Inventory.Items.Select(AddressOf ItemModel.Create)
         End Get
     End Property
 

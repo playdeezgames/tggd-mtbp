@@ -15,7 +15,7 @@ Friend Class FeaturePlaceItemMenu
         Get
             Return Enumerable.Empty(Of LaunchDelegate).
                 Append(AddressOf ChooseNeverMind).
-                Concat(Model.LegacyInventoryItems.Select(AddressOf ChooseItem))
+                Concat(Model.Inventory.Items.Select(AddressOf ChooseItem))
         End Get
     End Property
 

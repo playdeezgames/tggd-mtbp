@@ -22,30 +22,6 @@ Public Class WorldModel
         End Get
     End Property
 
-    Public ReadOnly Property LegacyHasGroundItems As Boolean Implements IWorldModel.LegacyHasGroundItems
-        Get
-            Return Not Entity.Avatar.IsDead AndAlso Entity.Avatar.Location.Inventory.HasItems
-        End Get
-    End Property
-
-    Public ReadOnly Property LegacyGroundItems As IEnumerable(Of IItemModel) Implements IWorldModel.LegacyGroundItems
-        Get
-            Return Entity.Avatar.Location.Inventory.Items.Select(AddressOf ItemModel.Create)
-        End Get
-    End Property
-
-    Public ReadOnly Property LegacyHasItems As Boolean Implements IWorldModel.LegacyHasItems
-        Get
-            Return Not Entity.Avatar.IsDead AndAlso Entity.Avatar.Inventory.HasItems
-        End Get
-    End Property
-
-    Public ReadOnly Property LegacyInventoryItems As IEnumerable(Of IItemModel) Implements IWorldModel.LegacyInventoryItems
-        Get
-            Return Entity.Avatar.Inventory.Items.Select(AddressOf ItemModel.Create)
-        End Get
-    End Property
-
     Public ReadOnly Property Views As IViewsModel Implements IWorldModel.Views
         Get
             Return ViewsModel.Create(Entity)
