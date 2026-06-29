@@ -1,5 +1,4 @@
 ﻿Imports TGGD.Provision
-
 Public Class WorldData
     Inherits EntityData
     Public Property Locations As New Dictionary(Of Guid, LocationData)
