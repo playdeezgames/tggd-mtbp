@@ -14,7 +14,7 @@ Friend Class MoveMenu
                 {
                     AddressOf ChooseCancel
                 }
-            choices.AddRange(Model.Exits.Select(AddressOf MakeExitChoice))
+            choices.AddRange(Model.Exits.LegacyExits.Select(AddressOf MakeExitChoice))
             Return choices
         End Get
     End Property

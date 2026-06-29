@@ -22,18 +22,6 @@ Public Class WorldModel
         End Get
     End Property
 
-    Public ReadOnly Property CanMove As Boolean Implements IWorldModel.CanMove
-        Get
-            Return Not Entity.Avatar.IsDead AndAlso Entity.Avatar.Location.Routes.Any()
-        End Get
-    End Property
-
-    Public ReadOnly Property Exits As IEnumerable(Of IExitModel) Implements IWorldModel.Exits
-        Get
-            Return Entity.Avatar.Location.Routes.Select(Function(x) ExitModel.Create(x.Key, x.Value))
-        End Get
-    End Property
-
     Public ReadOnly Property HasGroundItems As Boolean Implements IWorldModel.HasGroundItems
         Get
             Return Not Entity.Avatar.IsDead AndAlso Entity.Avatar.Location.Inventory.HasItems
@@ -55,7 +43,6 @@ Public Class WorldModel
     Public ReadOnly Property InventoryItems As IEnumerable(Of IItemModel) Implements IWorldModel.InventoryItems
         Get
             Return Entity.Avatar.Inventory.Items.Select(AddressOf ItemModel.Create)
-
         End Get
     End Property
 
@@ -71,10 +58,22 @@ Public Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property Views As IViewsModel Implements IWorldModel.Views
+        Get
+            Return ViewsModel.Create(Entity)
+        End Get
+    End Property
+
+    Public ReadOnly Property Exits As IExitsModel Implements IWorldModel.Exits
+        Get
+            Return ExitsModel.Create(Entity)
+        End Get
+    End Property
+
     Public Sub Embark() Implements IWorldModel.Embark
         Abandon()
         Entity.Initialize(InitializationContext.Create())
-        Look()
+        Views.ShowLocation(False)
     End Sub
 
     Public Sub Abandon() Implements IWorldModel.Abandon
@@ -83,22 +82,6 @@ Public Class WorldModel
         If quittable Then
             Entity.SetTag(Tags.QUITTABLE)
         End If
-    End Sub
-
-    Public Sub Move(direction As String) Implements IWorldModel.Move
-        Entity.ClearMessages()
-        Entity.AddMessage($"{Entity.Avatar.GetName()} moves {direction}.")
-        Entity.Avatar.Location = Entity.Avatar.Location.Routes(direction).Destination
-        Entity.Avatar.HandleToxicity()
-        Entity.Avatar.HandleHunger()
-    End Sub
-
-    Public Sub ShowStatus() Implements IWorldModel.ShowStatus
-        Entity.Avatar.ShowStatus()
-    End Sub
-
-    Public Sub Look() Implements IWorldModel.Look
-        Entity.Avatar.Look()
     End Sub
 
     Public Shared Async Function Create(quittable As Boolean, persister As IPersister) As Task(Of IWorldModel)

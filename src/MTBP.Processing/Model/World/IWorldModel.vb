@@ -6,13 +6,8 @@ Public Interface IWorldModel
     Sub Embark()
     Sub Abandon()
     ReadOnly Property Messages As IEnumerable(Of String)
-    'TODO: view selection
-    Sub ShowStatus()
-    Sub Look()
-    'TODO: exit things!
-    Sub Move(direction As String)
-    ReadOnly Property CanMove As Boolean
-    ReadOnly Property Exits As IEnumerable(Of IExitModel)
+    ReadOnly Property Views As IViewsModel
+    ReadOnly Property Exits As IExitsModel
     'TODO: ground item things!
     ReadOnly Property HasGroundItems As Boolean
     ReadOnly Property GroundItems As IEnumerable(Of IItemModel)

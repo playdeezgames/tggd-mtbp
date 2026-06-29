@@ -25,7 +25,7 @@ Friend Class NavigationMenu
         Return DialogChoice.Create(
             True,
             "Look",
-            LookActivity.Launch(context, model, exitDialog))
+            LookActivity.Launch(context, model, exitDialog, True))
     End Function
 
     Private Function ChooseStatusMenu(
@@ -60,7 +60,7 @@ Friend Class NavigationMenu
     End Function
 
     Private Shared Function ChooseMoveMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(model.CanMove, "Move...", MoveMenu.Launch(context, model, exitDialog))
+        Return DialogChoice.Create(model.Exits.LegacyCanMove, "Move...", MoveMenu.Launch(context, model, exitDialog))
     End Function
 
     Private Shared Function ChooseGameMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice

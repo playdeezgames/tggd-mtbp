@@ -23,7 +23,7 @@ Friend Class FeaturesMenu
                                     context As IDisplayContext,
                                     model As IWorldModel,
                                     exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(True, "Never Mind", LookActivity.Launch(context, model, exitDialog))
+        Return DialogChoice.Create(True, "Never Mind", LookActivity.Launch(context, model, exitDialog, False))
     End Function
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
@@ -31,7 +31,7 @@ Friend Class FeaturesMenu
                    If model.HasFeatures Then
                        Return New FeaturesMenu(context, model, exitDialog)
                    End If
-                   Return LookActivity.Launch(context, model, exitDialog).Invoke()
+                   Return LookActivity.Launch(context, model, exitDialog, False).Invoke()
                End Function
     End Function
 

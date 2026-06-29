@@ -32,7 +32,7 @@ Friend Class InventoryMenu
                    If model.HasItems Then
                        Return New InventoryMenu(context, model, exitDialog)
                    End If
-                   Return NeutralActivity.Launch(context, model, exitDialog).Invoke()
+                   Return LookActivity.Launch(context, model, exitDialog, False).Invoke()
                End Function
     End Function
 

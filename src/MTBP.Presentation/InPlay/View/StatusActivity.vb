@@ -13,7 +13,7 @@ Friend Class StatusActivity
     End Function
 
     Public Overrides Function Run() As IDialogPrompt
-        Model.ShowStatus()
+        Model.Views.ShowStatus()
         Return NeutralActivity.Launch(Context, Model, ExitDialog).Invoke().Run
     End Function
 
