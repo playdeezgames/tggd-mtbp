@@ -20,10 +20,12 @@ Friend Module GraveyardInitializer
 
     Private Sub InitializeGraveyardEntrance(route As IRoute)
         route.SetName("Graveyard Entrance")
+        route.SetDescription("You can enter the graveyard here. You may abandon all hope if you wish, but you don't have do, because there isn't a sign telling you to.")
     End Sub
 
     Private Sub InitializeGraveyardExit(route As IRoute)
         route.SetName("Graveyard Exit")
+        route.SetDescription("You can exit the graveyard here. If you abandoned you hope here, you can pick it back up if you like.")
     End Sub
 
     Private Function GenerateMazeLocations(world As IWorld, maze As Maze(Of String)) As ILocation(,)
@@ -53,10 +55,12 @@ Friend Module GraveyardInitializer
 
     Private Sub InitializeGraveyardPath(route As IRoute)
         route.SetName("path")
+        route.SetDescription("Go this way to enjoy yet another portion of this graveyard!")
     End Sub
 
     Private Sub InitializeGraveyardLocation(location As ILocation)
         location.SetName("graveyard")
+        location.SetDescription("You know, in most actual graveyards, the grass is green and well tended. But for some reason, in games like this, it's all brown and gray and foggy and creepy. I don't even know where that tense music is coming from.")
         location.SetCounter(Counters.TOXICITY, RNG.RollDice(GRAVEYARD_TOXICITY_DICE))
     End Sub
 End Module

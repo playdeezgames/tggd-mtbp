@@ -18,6 +18,11 @@ Friend Class FeatureMenuDialog
         End Get
     End Property
 
+    Public Overrides Function Run() As IDialogPrompt
+        FeatureModel.Describe()
+        Return MyBase.Run()
+    End Function
+
     Private Function ChooseNeverMind(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(True, "Never Mind", FeaturesMenuDialog.Launch(context, model, exitDialog))
     End Function

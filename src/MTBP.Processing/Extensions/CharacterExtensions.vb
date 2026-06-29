@@ -75,7 +75,7 @@ Friend Module CharacterExtensions
         Dim features = location.Features
         If features.Any Then
             character.AddMessage("Features:")
-            For Each feature In features
+            For Each feature As IFeature In features
                 character.AddMessage($"- {feature.GetName}")
             Next
         End If
@@ -88,6 +88,19 @@ Friend Module CharacterExtensions
         End If
         If location.Inventory.HasItems Then
             character.AddMessage("There are items on the ground.")
+        End If
+    End Sub
+    <Extension>
+    Friend Sub Describe(character As ICharacter, feature As IFeature)
+        character.SetView(Views.FEATURE)
+        character.AddMessage($"Inspecting {feature.GetName}:")
+        character.AddMessage(feature.GetDescription())
+        Dim items = feature.Inventory.Items
+        If items.Any Then
+            character.AddMessage("Items:")
+            For Each item In items
+                character.AddMessage($"- {item.GetName}")
+            Next
         End If
     End Sub
 End Module

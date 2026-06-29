@@ -10,6 +10,11 @@ Friend Class FeatureModel
         Return New FeatureModel(feature)
     End Function
 
+    Public Sub Describe() Implements IFeatureModel.Describe
+        feature.World.ClearMessages()
+        feature.World.Avatar.Describe(feature)
+    End Sub
+
     Public ReadOnly Property Text As String Implements IFeatureModel.Text
         Get
             Return feature.GetName

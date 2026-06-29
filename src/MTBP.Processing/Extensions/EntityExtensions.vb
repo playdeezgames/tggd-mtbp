@@ -46,4 +46,12 @@ Friend Module EntityExtensions
     Friend Function GetView(entity As IMTBPEntity) As String
         Return If(entity.TryGetMetadata(Metadatas.VIEW), Grimoire.DEFAULT_VIEW)
     End Function
+    <Extension>
+    Friend Function GetDescription(entity As IMTBPEntity) As String
+        Return entity.GetMetadata(Metadatas.DESCRIPTION)
+    End Function
+    <Extension>
+    Friend Sub SetDescription(entity As IMTBPEntity, description As String)
+        entity.SetMetadata(Metadatas.DESCRIPTION, description)
+    End Sub
 End Module
