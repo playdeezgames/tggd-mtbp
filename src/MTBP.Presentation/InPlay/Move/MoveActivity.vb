@@ -16,7 +16,7 @@ Friend Class MoveActivity
     End Function
 
     Public Overrides Function Run() As IDialogPrompt
-        Model.Exits.LegacyMove(Direction)
+        Model.Exits.Move(Direction)
         Return LookActivity.Launch(Context, Model, ExitDialog, False).Invoke().Run()
     End Function
 

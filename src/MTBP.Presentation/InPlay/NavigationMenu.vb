@@ -60,7 +60,7 @@ Friend Class NavigationMenu
     End Function
 
     Private Shared Function ChooseMoveMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(model.Exits.LegacyCanMove, "Move...", MoveMenu.Launch(context, model, exitDialog))
+        Return DialogChoice.Create(model.Exits.HasAny, "Move...", MoveMenu.Launch(context, model, exitDialog))
     End Function
 
     Private Shared Function ChooseGameMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
