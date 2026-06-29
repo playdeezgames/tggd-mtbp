@@ -17,7 +17,7 @@ Friend Class MoveActivity
 
     Public Overrides Function Run() As IDialogPrompt
         Model.Move(Direction)
-        Return NeutralDialog.Launch(Context, Model, ExitDialog).Invoke().Run()
+        Return NeutralActivity.Launch(Context, Model, ExitDialog).Invoke().Run()
     End Function
 
     Protected Overrides Function Relaunch() As IDialog

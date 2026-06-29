@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Friend Class InventoryMenuDialog
+Friend Class InventoryMenu
     Inherits PickerMenu
 
     Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource)
@@ -17,11 +17,11 @@ Friend Class InventoryMenuDialog
     End Property
 
     Private Function ChooseNeverMind(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(True, "Never Mind", NeutralDialog.Launch(context, model, exitDialog))
+        Return DialogChoice.Create(True, "Never Mind", NeutralActivity.Launch(context, model, exitDialog))
     End Function
 
     Private Function ChooseItem(itemModel As IItemModel) As LaunchDelegate
-        Return Function(c, m, e) DialogChoice.Create(True, itemModel.Text, InventoryItemMenuDialog.Launch(c, m, e, itemModel))
+        Return Function(c, m, e) DialogChoice.Create(True, itemModel.Text, InventoryItemMenu.Launch(c, m, e, itemModel))
     End Function
 
     Friend Shared Function Launch(
@@ -30,13 +30,13 @@ Friend Class InventoryMenuDialog
                                  exitDialog As DialogSource) As DialogSource
         Return Function()
                    If model.HasItems Then
-                       Return New InventoryMenuDialog(context, model, exitDialog)
+                       Return New InventoryMenu(context, model, exitDialog)
                    End If
-                   Return NeutralDialog.Launch(context, model, exitDialog).Invoke()
+                   Return NeutralActivity.Launch(context, model, exitDialog).Invoke()
                End Function
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return New InventoryMenuDialog(Context, Model, ExitDialog)
+        Return New InventoryMenu(Context, Model, ExitDialog)
     End Function
 End Class

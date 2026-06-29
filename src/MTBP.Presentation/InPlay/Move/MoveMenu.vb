@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Friend Class MoveMenuDialog
+Friend Class MoveMenu
     Inherits PickerMenu
 
     Public Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource)
@@ -26,11 +26,11 @@ Friend Class MoveMenuDialog
     End Function
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
-        Return Function() New MoveMenuDialog(context, model, exitDialog)
+        Return Function() New MoveMenu(context, model, exitDialog)
     End Function
 
     Private Shared Function ChooseCancel(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(True, "Cancel", NeutralDialog.Launch(context, model, exitDialog))
+        Return DialogChoice.Create(True, "Cancel", NeutralActivity.Launch(context, model, exitDialog))
     End Function
 
     Protected Overrides Function Relaunch() As IDialog

@@ -14,7 +14,7 @@ Friend Class StatusActivity
 
     Public Overrides Function Run() As IDialogPrompt
         Model.ShowStatus()
-        Return NeutralDialog.Launch(Context, Model, ExitDialog).Invoke().Run
+        Return NeutralActivity.Launch(Context, Model, ExitDialog).Invoke().Run
     End Function
 
     Protected Overrides Function Relaunch() As IDialog

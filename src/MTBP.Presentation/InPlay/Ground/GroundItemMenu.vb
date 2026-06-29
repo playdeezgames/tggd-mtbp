@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Friend Class GroundItemMenuDialog
+Friend Class GroundItemMenu
     Inherits PickerMenu
 
     Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IItemModel)
@@ -24,14 +24,14 @@ Friend Class GroundItemMenuDialog
     End Function
 
     Private Function ChooseNeverMind(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(True, "Never Mind", GroundMenuDialog.Launch(context, model, exitDialog))
+        Return DialogChoice.Create(True, "Never Mind", GroundMenu.Launch(context, model, exitDialog))
     End Function
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, itemModel As IItemModel) As DialogSource
-        Return Function() New GroundItemMenuDialog(context, model, exitDialog, itemModel)
+        Return Function() New GroundItemMenu(context, model, exitDialog, itemModel)
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return New GroundItemMenuDialog(Context, Model, ExitDialog, itemModel)
+        Return New GroundItemMenu(Context, Model, ExitDialog, ItemModel)
     End Function
 End Class

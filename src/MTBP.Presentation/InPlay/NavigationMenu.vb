@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Friend Class NavigationDialog
+Friend Class NavigationMenu
     Inherits PickerMenu
 
     Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource)
@@ -42,14 +42,14 @@ Friend Class NavigationDialog
         Return DialogChoice.Create(
             model.HasGroundItems,
             "Ground...",
-            GroundMenuDialog.Launch(context, model, exitDialog))
+            GroundMenu.Launch(context, model, exitDialog))
     End Function
 
     Private Function ChooseInventoryMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
         Return DialogChoice.Create(
             model.HasItems,
             "Inventory...",
-            InventoryMenuDialog.Launch(context, model, exitDialog))
+            InventoryMenu.Launch(context, model, exitDialog))
     End Function
 
     Private Function ChooseFeatureMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
@@ -60,7 +60,7 @@ Friend Class NavigationDialog
     End Function
 
     Private Shared Function ChooseMoveMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(model.CanMove, "Move...", MoveMenuDialog.Launch(context, model, exitDialog))
+        Return DialogChoice.Create(model.CanMove, "Move...", MoveMenu.Launch(context, model, exitDialog))
     End Function
 
     Private Shared Function ChooseGameMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
@@ -68,10 +68,10 @@ Friend Class NavigationDialog
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return New NavigationDialog(Context, Model, ExitDialog)
+        Return New NavigationMenu(Context, Model, ExitDialog)
     End Function
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
-        Return Function() New NavigationDialog(context, model, exitDialog)
+        Return Function() New NavigationMenu(context, model, exitDialog)
     End Function
 End Class

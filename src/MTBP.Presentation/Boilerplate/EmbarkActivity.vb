@@ -14,7 +14,7 @@ Friend Class EmbarkActivity
 
     Public Overrides Function Run() As IDialogPrompt
         Model.Embark()
-        Return NeutralDialog.Launch(Context, Model, ExitDialog).Invoke().Run()
+        Return NeutralActivity.Launch(Context, Model, ExitDialog).Invoke().Run()
     End Function
 
     Protected Overrides Function Relaunch() As IDialog

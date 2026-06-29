@@ -15,7 +15,7 @@ Friend Class GameMenu
     Public Overrides Function Run() As IDialogPrompt
         Return DialogPrompt.CreateChoicePrompt(
             "Game Menu:",
-            DialogChoice.Create(True, "Continue Game", NeutralDialog.Launch(Context, Model, ExitDialog)),
+            DialogChoice.Create(True, "Continue Game", NeutralActivity.Launch(Context, Model, ExitDialog)),
             DialogChoice.Create(True, "Abandon Game", ConfirmDialog(Of IDisplayContext).Launch(Context, "Are you sure you want to abandon?", AbandonGameActivity.Launch(Context, Model, ExitDialog), AddressOf Relaunch)))
     End Function
 

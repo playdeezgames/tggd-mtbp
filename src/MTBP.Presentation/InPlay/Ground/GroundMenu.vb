@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Friend Class GroundMenuDialog
+Friend Class GroundMenu
     Inherits PickerMenu
 
     Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource)
@@ -17,23 +17,23 @@ Friend Class GroundMenuDialog
     End Property
 
     Private Function ChooseItem(itemModel As IItemModel) As LaunchDelegate
-        Return Function(c, m, e) DialogChoice.Create(True, itemModel.Text, GroundItemMenuDialog.Launch(c, m, e, itemModel))
+        Return Function(c, m, e) DialogChoice.Create(True, itemModel.Text, GroundItemMenu.Launch(c, m, e, itemModel))
     End Function
 
     Private Function ChooseNeverMind(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(True, "Never Mind", NeutralDialog.Launch(context, model, exitDialog))
+        Return DialogChoice.Create(True, "Never Mind", NeutralActivity.Launch(context, model, exitDialog))
     End Function
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
         Return Function()
                    If model.HasGroundItems Then
-                       Return New GroundMenuDialog(context, model, exitDialog)
+                       Return New GroundMenu(context, model, exitDialog)
                    End If
-                   Return NeutralDialog.Launch(context, model, exitDialog).Invoke()
+                   Return NeutralActivity.Launch(context, model, exitDialog).Invoke()
                End Function
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return New GroundMenuDialog(Context, Model, ExitDialog)
+        Return New GroundMenu(Context, Model, ExitDialog)
     End Function
 End Class
