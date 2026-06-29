@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Friend Class FeaturesMenuDialog
+Friend Class FeaturesMenu
     Inherits PickerDialog
 
     Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource)
@@ -16,7 +16,7 @@ Friend Class FeaturesMenuDialog
         End Get
     End Property
     Private Function ChooseFeature(featureModel As IFeatureModel) As LaunchDelegate
-        Return Function(c, m, e) DialogChoice.Create(True, featureModel.Text, FeatureMenuDialog.Launch(c, m, e, featureModel))
+        Return Function(c, m, e) DialogChoice.Create(True, featureModel.Text, FeatureMenu.Launch(c, m, e, featureModel))
     End Function
 
     Private Function ChooseNeverMind(
@@ -29,13 +29,13 @@ Friend Class FeaturesMenuDialog
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource
         Return Function()
                    If model.HasFeatures Then
-                       Return New FeaturesMenuDialog(context, model, exitDialog)
+                       Return New FeaturesMenu(context, model, exitDialog)
                    End If
                    Return LookActivity.Launch(context, model, exitDialog).Invoke()
                End Function
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return New FeaturesMenuDialog(Context, Model, ExitDialog)
+        Return New FeaturesMenu(Context, Model, ExitDialog)
     End Function
 End Class

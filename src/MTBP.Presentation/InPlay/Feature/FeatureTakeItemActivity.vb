@@ -19,7 +19,7 @@ Friend Class FeatureTakeItemActivity
 
     Public Overrides Function Run() As IDialogPrompt
         ItemModel.Take()
-        Return FeatureMenuDialog.Launch(Context, Model, ExitDialog, FeatureModel).Invoke().Run()
+        Return FeatureMenu.Launch(Context, Model, ExitDialog, FeatureModel).Invoke().Run()
     End Function
 
     Protected Overrides Function Relaunch() As IDialog

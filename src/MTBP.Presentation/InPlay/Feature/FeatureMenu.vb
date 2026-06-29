@@ -1,7 +1,7 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Friend Class FeatureMenuDialog
+Friend Class FeatureMenu
     Inherits PickerDialog
 
     Private ReadOnly FeatureModel As IFeatureModel
@@ -27,7 +27,7 @@ Friend Class FeatureMenuDialog
         Return DialogChoice.Create(
             FeatureModel.HasItems,
             "Take Item...",
-            FeatureTakeItemsMenuDialog.Launch(context, model, exitDialog, FeatureModel))
+            FeatureTakeItemMenu.Launch(context, model, exitDialog, FeatureModel))
     End Function
 
     Private Function ChoosePlaceItem(
@@ -37,7 +37,7 @@ Friend Class FeatureMenuDialog
         Return DialogChoice.Create(
             model.HasItems,
             "Place Item...",
-            FeaturePlaceItemsMenuDialog.Launch(context, model, exitDialog, FeatureModel))
+            FeaturePlaceItemMenu.Launch(context, model, exitDialog, FeatureModel))
     End Function
 
     Public Overrides Function Run() As IDialogPrompt
@@ -46,14 +46,14 @@ Friend Class FeatureMenuDialog
     End Function
 
     Private Function ChooseNeverMind(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(True, "Never Mind", FeaturesMenuDialog.Launch(context, model, exitDialog))
+        Return DialogChoice.Create(True, "Never Mind", FeaturesMenu.Launch(context, model, exitDialog))
     End Function
 
     Friend Shared Function Launch(c As IDisplayContext, m As IWorldModel, e As DialogSource, featureModel As IFeatureModel) As DialogSource
-        Return Function() New FeatureMenuDialog(c, m, e, featureModel)
+        Return Function() New FeatureMenu(c, m, e, featureModel)
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return New FeatureMenuDialog(Context, Model, ExitDialog, FeatureModel)
+        Return New FeatureMenu(Context, Model, ExitDialog, FeatureModel)
     End Function
 End Class

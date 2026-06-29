@@ -1,13 +1,13 @@
 ﻿Imports MTBP.Processing
 Imports TGGD.Presentation
 
-Friend Class FeatureTakeItemsMenuDialog
+Friend Class FeaturePlaceItemMenu
     Inherits PickerDialog
 
     Private ReadOnly FeatureModel As IFeatureModel
 
     Private Sub New(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, featureModel As IFeatureModel)
-        MyBase.New(context, model, exitDialog, $"Take which item from {featureModel.Text}?")
+        MyBase.New(context, model, exitDialog, $"Place what item on {featureModel.Text}?")
         Me.FeatureModel = featureModel
     End Sub
 
@@ -15,23 +15,23 @@ Friend Class FeatureTakeItemsMenuDialog
         Get
             Return Enumerable.Empty(Of LaunchDelegate).
                 Append(AddressOf ChooseNeverMind).
-                Concat(FeatureModel.InventoryItems.Select(AddressOf ChooseItem))
+                Concat(Model.InventoryItems.Select(AddressOf ChooseItem))
         End Get
     End Property
 
     Private Function ChooseItem(itemModel As IItemModel) As LaunchDelegate
-        Return Function(c, m, e) DialogChoice.Create(True, itemModel.Text, FeatureTakeItemActivity.Launch(c, m, e, FeatureModel, itemModel))
+        Return Function(c, m, e) DialogChoice.Create(True, itemModel.Text, FeaturePlaceItemActivity.Launch(c, m, e, FeatureModel, itemModel))
     End Function
 
     Private Function ChooseNeverMind(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(True, "Never Mind", FeatureMenuDialog.Launch(context, model, exitDialog, FeatureModel))
+        Return DialogChoice.Create(True, "Never Mind", FeatureMenu.Launch(context, model, exitDialog, FeatureModel))
     End Function
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource, featureModel As IFeatureModel) As DialogSource
-        Return Function() New FeatureTakeItemsMenuDialog(context, model, exitDialog, featureModel)
+        Return Function() New FeaturePlaceItemMenu(context, model, exitDialog, featureModel)
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return New FeatureTakeItemsMenuDialog(Context, Model, ExitDialog, FeatureModel)
+        Return New FeaturePlaceItemMenu(Context, Model, ExitDialog, FeatureModel)
     End Function
 End Class

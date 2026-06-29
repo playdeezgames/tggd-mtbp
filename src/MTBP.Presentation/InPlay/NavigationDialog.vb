@@ -56,7 +56,7 @@ Friend Class NavigationDialog
         Return DialogChoice.Create(
             model.HasFeatures,
             "Feature...",
-            FeaturesMenuDialog.Launch(context, model, exitDialog))
+            FeaturesMenu.Launch(context, model, exitDialog))
     End Function
 
     Private Shared Function ChooseMoveMenu(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As IDialogChoice

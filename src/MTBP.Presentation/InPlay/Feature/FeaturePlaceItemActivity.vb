@@ -24,7 +24,7 @@ Friend Class FeaturePlaceItemActivity
 
     Public Overrides Function Run() As IDialogPrompt
         ItemModel.Place(FeatureModel)
-        Return FeatureMenuDialog.Launch(Context, Model, ExitDialog, FeatureModel).Invoke().Run()
+        Return FeatureMenu.Launch(Context, Model, ExitDialog, FeatureModel).Invoke().Run()
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
