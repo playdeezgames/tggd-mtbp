@@ -14,8 +14,53 @@ Friend Module GraveyardInitializer
         Dim maze As New Maze(Of String)(GRAVEYARD_COLUMNS, GRAVEYARD_ROWS, directionTable)
         maze.Generate()
         Dim mazeLocations As ILocation(,) = GenerateMazeLocations(world, maze)
-        mazeLocations(GRAVEYARD_CENTER_COLUMN, GRAVEYARD_ROWS - 1).CreateRoute(Directions.SOUTH, context.ChurchYard, AddressOf InitializeGraveyardExit)
-        context.ChurchYard.CreateRoute(Directions.NORTH, mazeLocations(GRAVEYARD_CENTER_COLUMN, GRAVEYARD_ROWS - 1), AddressOf InitializeGraveyardEntrance)
+        Dim graveYardEntrance = mazeLocations(GRAVEYARD_CENTER_COLUMN, GRAVEYARD_ROWS - 1)
+        SetDepth(graveYardEntrance, 0)
+        graveYardEntrance.CreateRoute(Directions.SOUTH, context.ChurchYard, AddressOf InitializeGraveyardExit)
+        context.ChurchYard.CreateRoute(Directions.NORTH, graveYardEntrance, AddressOf InitializeGraveyardEntrance)
+        PopulateGraveyard(mazeLocations.Cast(Of ILocation))
+    End Sub
+
+    Private ReadOnly ringSpawners As IReadOnlyList(Of LocationInitializer) =
+        New List(Of LocationInitializer) From
+        {
+            SpawnRing("Amber Ring", "This is an amber ring. A is for amber. Hint hint!", {Tags.RING, Tags.AMBER}),
+            SpawnRing("Bone Ring", "This is a bone ring. B is for bone. Hint hint!", {Tags.RING, Tags.BONE}),
+            SpawnRing("Jade Ring", "This is a jade ring. J is for jade. Hint hint!", {Tags.RING, Tags.JADE}),
+            SpawnRing("Ebony Ring", "This is a ebony ring. E is for ebony. Hint hint!", {Tags.RING, Tags.EBONY}),
+            SpawnRing("Ivory Ring", "This is a ivory ring. I is for ivory. Hint hint!", {Tags.RING, Tags.IVORY}),
+            SpawnRing("Silver Ring", "This is a silver ring. S is for silver. Hint hint!", {Tags.RING, Tags.SILVER})
+        }
+
+    Private Function SpawnRing(itemName As String, itemDescription As String, itemTags() As String) As LocationInitializer
+        Return Sub(location) location.Inventory.CreateItem(CreateItem(itemName, itemDescription, itemTags))
+    End Function
+
+    Private Function CreateItem(itemName As String, itemDescription As String, itemTags() As String) As ItemInitializer
+        Return Sub(item)
+                   item.SetName(itemName)
+                   item.SetDescription(itemDescription)
+                   For Each itemTag In itemTags
+                       item.SetTag(itemTag)
+                   Next
+               End Sub
+    End Function
+
+    Private Sub PopulateGraveyard(graveyardLocations As IEnumerable(Of ILocation))
+        Dim deadEnds As New Queue(Of ILocation)(graveyardLocations.Where(Function(x) x.Routes.Count = 1).OrderByDescending(Function(x) x.GetCounter(Counters.DEPTH)))
+        For Each ringSpawner In ringSpawners
+            ringSpawner.Invoke(deadEnds.Dequeue)
+        Next
+    End Sub
+
+    Private Sub SetDepth(location As ILocation, depth As Integer)
+        If location.HasCounter(Counters.DEPTH) Then
+            Return
+        End If
+        location.SetCounter(Counters.DEPTH, depth)
+        For Each route In location.Routes
+            SetDepth(route.Value.Destination, depth + 1)
+        Next
     End Sub
 
     Private Sub InitializeGraveyardEntrance(route As IRoute)

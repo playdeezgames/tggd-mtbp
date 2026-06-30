@@ -9,8 +9,14 @@ Friend Module AbandonedHouseInitializer
                    location.CreateRoute(Directions.WEST, context.ChurchYard, AddressOf InitializeHouseExit)
                    context.ChurchYard.CreateRoute(Directions.EAST, location, AddressOf InitializeHouseEntrance)
                    location.Inventory.CreateItem(AddressOf InitializeDestroyedPrinter)
+                   location.Inventory.CreateItem(AddressOf InitializePkasticBag)
                End Sub
     End Function
+
+    Private Sub InitializePkasticBag(item As IItem)
+        item.SetName("Pkastic Bag")
+        item.SetDescription("This is a pkastic bag. Inside, there are mysteries. Probably.")
+    End Sub
 
     Private Sub InitializeDestroyedPrinter(item As IItem)
         item.SetName("Destroyed Printer")

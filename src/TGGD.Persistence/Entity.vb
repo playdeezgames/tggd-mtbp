@@ -197,4 +197,16 @@ Public MustInherit Class Entity(Of TData As EntityData)
     Public Function IsCounterMaximum(counterId As String) As Boolean Implements IEntity.IsCounterMaximum
         Return GetCounter(counterId) = GetCounterMaximum(counterId)
     End Function
+
+    Public Function HasMetadata(metadataId As String) As Boolean Implements IEntity.HasMetadata
+        Return Data.Metadatas.ContainsKey(metadataId)
+    End Function
+
+    Public Function HasCounter(counterId As String) As Boolean Implements IEntity.HasCounter
+        Return Data.Counters.ContainsKey(counterId)
+    End Function
+
+    Public Function HasDimension(dimensionId As String) As Boolean Implements IEntity.HasDimension
+        Return Data.Dimensions.ContainsKey(dimensionId)
+    End Function
 End Class

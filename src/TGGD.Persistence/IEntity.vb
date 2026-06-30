@@ -4,10 +4,12 @@ Public Interface IEntity
     Sub DefaultMetadata(metadataId As String, defaultValue As String)
     Function GetMetadata(metadataId As String) As String
     Function TryGetMetadata(metadataId As String) As String
+    Function HasMetadata(metadataId As String) As Boolean
     Sub SetCounter(counterId As String, counterValue As Integer)
     Sub DefaultCounter(counterId As String, defaultValue As Integer)
     Function GetCounter(counterId As String) As Integer
     Function TryGetCounter(counterId As String) As Integer?
+    Function HasCounter(counterId As String) As Boolean
     Function ChangeCounter(counterId As String, delta As Integer) As Integer
     Sub SetCounterMinimum(counterId As String, counterMinimum As Integer)
     Function GetCounterMinimum(counterId As String) As Integer
@@ -31,6 +33,7 @@ Public Interface IEntity
     Function GetDimensionMinimum(dimensionId As String) As Double
     Sub SetDimensionMaximum(dimensionId As String, dimensionMaximum As Double)
     Function GetDimensionMaximum(dimensionId As String) As Double
+    Function HasDimension(dimensionId As String) As Boolean
     Function IsCounterMinimum(counterId As String) As Boolean
     Function IsCounterMaximum(counterId As String) As Boolean
 End Interface
