@@ -1,4 +1,5 @@
 ﻿Imports MTBP.Persistence
+Imports TGGD.Processing
 
 Friend Module ChurchInitializer
     Friend Function Initialize(context As IInitializationContext) As LocationInitializer
@@ -7,8 +8,32 @@ Friend Module ChurchInitializer
                    location.SetName("This is a building for talking to the invisible sky-man. I ain't yer judge.")
                    context.Church = location
                    location.CreateFeature(AddressOf InitializeAltar)
+                   CreateAlcoves(location)
                    location.CreateRoute(Directions.EAST, context.ChurchYard, AddressOf InitializeChurchExit)
                    context.ChurchYard.CreateRoute(Directions.WEST, location, AddressOf InitializeChurchEntrance)
+               End Sub
+    End Function
+
+    Private Function CreateAlcoves(location As ILocation) As List(Of String)
+        Dim result As New List(Of String)
+        Dim consonants As New Queue(Of String)({Tags.BONE, Tags.JADE, Tags.SILVER}.OrderBy(Function(x) Guid.NewGuid))
+        Dim vowels As New Queue(Of String)({Tags.AMBER, Tags.EBONY, Tags.IVORY}.OrderBy(Function(x) Guid.NewGuid))
+        Dim isVowel = RNG.FromGenerator(RNG.MakeBooleanGenerator(1, 1))
+        For Each alcoveNumber In Enumerable.Range(1, ALCOVE_COUNT)
+            Dim tag = If(isVowel, vowels.Dequeue, consonants.Dequeue)
+            result.Add(tag)
+            isVowel = Not isVowel
+            location.CreateFeature(InitializeAlcove(alcoveNumber, tag))
+        Next
+        Return result
+    End Function
+
+    Private Function InitializeAlcove(alcoveNumber As Integer, tag As String) As FeatureInitializer
+        Return Sub(feature)
+                   feature.SetName($"Alcove #{alcoveNumber}")
+                   feature.SetDescription($"This is an alcove. There is a ring shaped recess in the midst of it.")
+                   feature.SetTag(tag)
+                   feature.SetCounter(Counters.ALCOVE_NUMBER, alcoveNumber)
                End Sub
     End Function
 

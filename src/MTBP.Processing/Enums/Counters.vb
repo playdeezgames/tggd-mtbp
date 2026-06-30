@@ -5,4 +5,5 @@
     Friend ReadOnly HUNGER_RATE As String = NameOf(HUNGER_RATE)
     Friend ReadOnly SATIETY As String = NameOf(SATIETY)
     Friend ReadOnly DEPTH As String = NameOf(DEPTH)
+    Friend ReadOnly ALCOVE_NUMBER As String = NameOf(ALCOVE_NUMBER)
 End Module

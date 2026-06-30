@@ -10,4 +10,5 @@
     Friend Const MAXIMUM_HEALTH = 100
     Friend Const MINIMUM_SATIETY = 0
     Friend Const MAXIMUM_SATIETY = 100
+    Friend Const ALCOVE_COUNT = 5
 End Module
