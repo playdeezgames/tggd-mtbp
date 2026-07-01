@@ -32,5 +32,11 @@ Friend Class FeatureModel
         End Get
     End Property
 
+    Public ReadOnly Property CanInteract As Boolean Implements IFeatureModel.CanInteract
+        Get
+            Return Not feature.World.Avatar.IsDead
+        End Get
+    End Property
+
     Friend ReadOnly feature As IFeature
 End Class

@@ -34,5 +34,7 @@ Friend Module RectoryInitializer
     Private Sub InitializeDeezNuts(item As IItem)
         item.SetName("Deeznuts")
         item.SetDescription("These are nuts. Which nuts are they? Deez. Hold them gently.")
+        item.SetTag(Tags.RING)
+        item.SetRingType(RingTypes.AMBER)
     End Sub
 End Module

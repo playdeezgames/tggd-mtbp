@@ -50,6 +50,11 @@ Friend Class FeatureMenu
     End Function
 
     Friend Shared Function Launch(c As IDisplayContext, m As IWorldModel, e As DialogSource, featureModel As IFeatureModel) As DialogSource
-        Return Function() New FeatureMenu(c, m, e, featureModel)
+        Return Function()
+                   If Not featureModel.CanInteract Then
+                       Return FeaturesMenu.Launch(c, m, e).Invoke()
+                   End If
+                   Return New FeatureMenu(c, m, e, featureModel)
+               End Function
     End Function
 End Class
