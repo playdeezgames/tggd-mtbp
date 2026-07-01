@@ -23,7 +23,7 @@ Friend Class FeaturesMenu
                                     context As IDisplayContext,
                                     model As IWorldModel,
                                     exitDialog As DialogSource) As IDialogChoice
-        Return DialogChoice.Create(True, "Never Mind", LookActivity.Launch(context, model, exitDialog, False))
+        Return DialogChoice.Create(True, "Never Mind", LookActivity.Launch(context, model, exitDialog, True))
     End Function
 
     Friend Shared Function Launch(context As IDisplayContext, model As IWorldModel, exitDialog As DialogSource) As DialogSource

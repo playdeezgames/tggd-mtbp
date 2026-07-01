@@ -6,4 +6,5 @@ Friend Interface IInitializationContext
     Property ChurchYard As ILocation
     Property AbandonedHouse As ILocation
     Property Church As ILocation
+    Property AlcoveTags As Queue(Of String)
 End Interface

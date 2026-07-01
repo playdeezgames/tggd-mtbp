@@ -18,7 +18,7 @@ Friend Module GraveyardInitializer
         SetDepth(graveYardEntrance, 0)
         graveYardEntrance.CreateRoute(Directions.SOUTH, context.ChurchYard, AddressOf InitializeGraveyardExit)
         context.ChurchYard.CreateRoute(Directions.NORTH, graveYardEntrance, AddressOf InitializeGraveyardEntrance)
-        PopulateGraveyard(mazeLocations.Cast(Of ILocation))
+        PopulateGraveyard(mazeLocations.Cast(Of ILocation), context)
     End Sub
 
     Private ReadOnly ringSpawners As IReadOnlyList(Of LocationInitializer) =
@@ -46,12 +46,62 @@ Friend Module GraveyardInitializer
                End Sub
     End Function
 
-    Private Sub PopulateGraveyard(graveyardLocations As IEnumerable(Of ILocation))
+    Private Sub PopulateGraveyard(graveyardLocations As IEnumerable(Of ILocation), context As IInitializationContext)
         Dim deadEnds As New Queue(Of ILocation)(graveyardLocations.Where(Function(x) x.Routes.Count = 1).OrderByDescending(Function(x) x.GetCounter(Counters.DEPTH)))
         For Each ringSpawner In ringSpawners
             ringSpawner.Invoke(deadEnds.Dequeue)
         Next
+        PopulateClues(graveyardLocations, context)
     End Sub
+
+    Private Sub PopulateClues(graveyardLocations As IEnumerable(Of ILocation), context As IInitializationContext)
+        Dim ringTags As New HashSet(Of String)(Grimoire.RING_TAGS)
+        Dim clues As New List(Of String)
+        For Each alcoveNumber In Enumerable.Range(1, ALCOVE_COUNT)
+            Dim alcoveTag = context.AlcoveTags.Dequeue
+            ringTags.Remove(alcoveTag)
+            For Each guess In Enumerable.Range(1, ALCOVE_COUNT)
+                If guess = alcoveNumber Then
+                    Continue For
+                End If
+                clues.Add($"{alcoveTag.First} is not in the {GetOrdinal(guess)} position.")
+            Next
+        Next
+        For Each ringTag In ringTags
+            For Each alcoveNumber In Enumerable.Range(1, ALCOVE_COUNT)
+                clues.Add($"{ringTag.First} is not in the {GetOrdinal(alcoveNumber)} position.")
+            Next
+        Next
+        Dim clueQueue As New Queue(Of String)(clues.OrderBy(Function(x) Guid.NewGuid))
+        Dim locationQueue As New Queue(Of ILocation)(graveyardLocations.OrderBy(Function(x) Guid.NewGuid))
+        For Each clueNumber In Enumerable.Range(1, clues.Count)
+            locationQueue.Dequeue().CreateFeature(CreateClue(clueNumber, clueQueue.Dequeue))
+        Next
+    End Sub
+
+    Private Function CreateClue(clueNumber As Integer, clueText As String) As FeatureInitializer
+        Return Sub(feature)
+                   feature.SetName($"Grave Marker")
+                   feature.SetDescription($"The inscription says ""{clueText}""")
+               End Sub
+    End Function
+
+    Private Function GetOrdinal(number As Integer) As String
+        Select Case number
+            Case 1
+                Return "first"
+            Case 2
+                Return "second"
+            Case 3
+                Return "third"
+            Case 4
+                Return "fourth"
+            Case 5
+                Return "fifth"
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
 
     Private Sub SetDepth(location As ILocation, depth As Integer)
         If location.HasCounter(Counters.DEPTH) Then

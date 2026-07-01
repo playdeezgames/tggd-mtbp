@@ -24,6 +24,8 @@ Friend Class InitializationContext
         End Get
     End Property
 
+    Public Property AlcoveTags As Queue(Of String) Implements IInitializationContext.AlcoveTags
+
     Friend Shared Function Create() As IInitializationContext
         Return New InitializationContext()
     End Function

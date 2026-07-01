@@ -7,4 +7,5 @@
     Friend ReadOnly IVORY As String = NameOf(IVORY)
     Friend ReadOnly EBONY As String = NameOf(EBONY)
     Friend ReadOnly SILVER As String = NameOf(SILVER)
+    Friend ReadOnly ALCOVE As String = NameOf(ALCOVE)
 End Module
