@@ -9,11 +9,28 @@ Friend Module ChurchInitializer
                    context.Church = location
                    location.CreateFeature(AddressOf InitializeAltar)
                    context.AlcoveTags = CreateAlcoves(location)
-
+                   location.CreateFeature(AddressOf InitializeBell)
                    location.CreateRoute(Directions.EAST, context.ChurchYard, AddressOf InitializeChurchExit)
                    context.ChurchYard.CreateRoute(Directions.WEST, location, AddressOf InitializeChurchEntrance)
                End Sub
     End Function
+
+    Private Sub InitializeBell(feature As IFeature)
+        feature.SetName("Rope")
+        feature.SetDescription("This is a rope. Presumably it goes to a church bell, for this is a church after all. Prolly if you pull this, it'll ring. Alternately, there is enough rope to hang yerself.")
+        feature.CreateVerb(AddressOf InitializePullRope)
+        feature.CreateVerb(AddressOf InitializeHangSelf)
+    End Sub
+
+    Private Sub InitializeHangSelf(verb As IVerb)
+        verb.SetName("Hang Self")
+        verb.SetDescription("Listen. I'm not telling what to do. I'm just saying that options are available.")
+    End Sub
+
+    Private Sub InitializePullRope(verb As IVerb)
+        verb.SetName("Pull Rope")
+        verb.SetDescription("Anything could happen! Most likely a bell will ring. But who knows?")
+    End Sub
 
     Private Function CreateAlcoves(location As ILocation) As Queue(Of String)
         Dim result As New Queue(Of String)
