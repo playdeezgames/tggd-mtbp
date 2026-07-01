@@ -1,6 +1,6 @@
 ﻿Imports System.Runtime.CompilerServices
 Imports MTBP.Persistence
-
+Friend Delegate Function CharacterFeatureItemHandler(character As ICharacter, feature As IFeature, item As IItem) As Boolean
 Friend Module CharacterExtensions
     <Extension>
     Friend Function IsAvatar(character As ICharacter) As Boolean
@@ -99,5 +99,36 @@ Friend Module CharacterExtensions
                 character.AddMessage($"- {item.GetName}")
             Next
         End If
+    End Sub
+
+    Private ReadOnly placeItemHandlers As IEnumerable(Of CharacterFeatureItemHandler) =
+        {
+            AddressOf PlaceRingInAlcove
+        }
+
+    Private Function PlaceRingInAlcove(character As ICharacter, feature As IFeature, item As IItem) As Boolean
+        If Not feature.IsAlcove() OrElse Not item.IsRing() Then
+            Return False
+        End If
+        If feature.GetRingType() <> item.GetRingType() Then
+            character.AddMessage($"{character.GetName} has placed the wrong ring in the wrong alcove. As a result, the god {character.World.GetGodName()} has liquified his innards, and they squirt endlessly out of his butthole until he is dead. Yes, the spray is so heavy that some of it gets into {character.GetName}'s mouth prior to his demise.")
+            character.Kill()
+            Return True
+        End If
+        Return False
+    End Function
+
+    <Extension>
+    Friend Sub HandlePlaceItem(character As ICharacter, feature As IFeature, item As IItem)
+        For Each handler In placeItemHandlers
+            If handler.Invoke(character, feature, item) Then
+                Return
+            End If
+        Next
+        character.AddMessage($"Nothing special happens!")
+    End Sub
+    <Extension>
+    Friend Sub Kill(character As ICharacter)
+        character.SetCounter(Counters.HEALTH, character.GetCounterMinimum(Counters.HEALTH))
     End Sub
 End Module

@@ -17,23 +17,23 @@ Friend Module ChurchInitializer
 
     Private Function CreateAlcoves(location As ILocation) As Queue(Of String)
         Dim result As New Queue(Of String)
-        Dim consonants As New Queue(Of String)({Tags.BONE, Tags.JADE, Tags.SILVER}.OrderBy(Function(x) Guid.NewGuid))
-        Dim vowels As New Queue(Of String)({Tags.AMBER, Tags.EBONY, Tags.IVORY}.OrderBy(Function(x) Guid.NewGuid))
+        Dim consonants As New Queue(Of String)({RingTypes.BONE, RingTypes.JADE, RingTypes.SILVER}.OrderBy(Function(x) Guid.NewGuid))
+        Dim vowels As New Queue(Of String)({RingTypes.AMBER, RingTypes.EBONY, RingTypes.IVORY}.OrderBy(Function(x) Guid.NewGuid))
         Dim isVowel = RNG.FromGenerator(RNG.MakeBooleanGenerator(1, 1))
         For Each alcoveNumber In Enumerable.Range(1, ALCOVE_COUNT)
-            Dim tag = If(isVowel, vowels.Dequeue, consonants.Dequeue)
-            result.Enqueue(tag)
+            Dim ringType = If(isVowel, vowels.Dequeue, consonants.Dequeue)
+            result.Enqueue(ringType)
             isVowel = Not isVowel
-            location.CreateFeature(InitializeAlcove(alcoveNumber, tag))
+            location.CreateFeature(InitializeAlcove(alcoveNumber, ringType))
         Next
         Return result
     End Function
 
-    Private Function InitializeAlcove(alcoveNumber As Integer, tag As String) As FeatureInitializer
+    Private Function InitializeAlcove(alcoveNumber As Integer, ringType As String) As FeatureInitializer
         Return Sub(feature)
                    feature.SetName($"Alcove #{alcoveNumber}")
                    feature.SetDescription($"This is an alcove. There is a ring shaped recess in the midst of it.")
-                   feature.SetTag(tag)
+                   feature.SetRingType(ringType)
                    feature.SetTag(Tags.ALCOVE)
                    feature.SetCounter(Counters.ALCOVE_NUMBER, alcoveNumber)
                End Sub

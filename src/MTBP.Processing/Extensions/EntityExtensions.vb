@@ -46,4 +46,12 @@ Friend Module EntityExtensions
     Friend Sub SetDescription(entity As IMTBPEntity, description As String)
         entity.SetMetadata(Metadatas.DESCRIPTION, description)
     End Sub
+    <Extension>
+    Friend Function GetRingType(entity As IMTBPEntity) As String
+        Return entity.GetMetadata(Metadatas.RING_TYPE)
+    End Function
+    <Extension>
+    Friend Sub SetRingType(entity As IMTBPEntity, ringType As String)
+        entity.SetMetadata(Metadatas.RING_TYPE, ringType)
+    End Sub
 End Module

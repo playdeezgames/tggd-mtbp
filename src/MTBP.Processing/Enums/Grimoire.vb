@@ -11,5 +11,4 @@
     Friend Const MINIMUM_SATIETY = 0
     Friend Const MAXIMUM_SATIETY = 100
     Friend Const ALCOVE_COUNT = 5
-    Friend ReadOnly RING_TAGS As IEnumerable(Of String) = {Tags.AMBER, Tags.BONE, Tags.EBONY, Tags.JADE, Tags.IVORY, Tags.SILVER}
 End Module

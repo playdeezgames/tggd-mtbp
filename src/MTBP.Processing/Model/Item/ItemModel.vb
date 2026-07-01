@@ -30,6 +30,7 @@ Friend Class ItemModel
         Dim character = world.Avatar
         character.AddMessage($"{character.GetName()} places {Item.GetName()} on {feature.GetName()}.")
         Item.Inventory = feature.Inventory
+        character.HandlePlaceItem(feature, Item)
     End Sub
 
     Public Sub Take() Implements IItemModel.Take

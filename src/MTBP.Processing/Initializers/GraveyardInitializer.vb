@@ -18,56 +18,60 @@ Friend Module GraveyardInitializer
         SetDepth(graveYardEntrance, 0)
         graveYardEntrance.CreateRoute(Directions.SOUTH, context.ChurchYard, AddressOf InitializeGraveyardExit)
         context.ChurchYard.CreateRoute(Directions.NORTH, graveYardEntrance, AddressOf InitializeGraveyardEntrance)
-        PopulateGraveyard(mazeLocations.Cast(Of ILocation), context)
+        world.SetGodName(PopulateGraveyard(mazeLocations.Cast(Of ILocation), context))
     End Sub
 
     Private ReadOnly ringSpawners As IReadOnlyList(Of LocationInitializer) =
         New List(Of LocationInitializer) From
         {
-            SpawnRing("Amber Ring", "This is an amber ring. A is for amber. Hint hint!", {Tags.RING, Tags.AMBER}),
-            SpawnRing("Bone Ring", "This is a bone ring. B is for bone. Hint hint!", {Tags.RING, Tags.BONE}),
-            SpawnRing("Jade Ring", "This is a jade ring. J is for jade. Hint hint!", {Tags.RING, Tags.JADE}),
-            SpawnRing("Ebony Ring", "This is a ebony ring. E is for ebony. Hint hint!", {Tags.RING, Tags.EBONY}),
-            SpawnRing("Ivory Ring", "This is a ivory ring. I is for ivory. Hint hint!", {Tags.RING, Tags.IVORY}),
-            SpawnRing("Silver Ring", "This is a silver ring. S is for silver. Hint hint!", {Tags.RING, Tags.SILVER})
+            SpawnRing("Amber Ring", "This is an amber ring. A is for amber. Hint hint!", {Tags.RING}, RingTypes.AMBER),
+            SpawnRing("Bone Ring", "This is a bone ring. B is for bone. Hint hint!", {Tags.RING}, RingTypes.BONE),
+            SpawnRing("Jade Ring", "This is a jade ring. J is for jade. Hint hint!", {Tags.RING}, RingTypes.JADE),
+            SpawnRing("Ebony Ring", "This is a ebony ring. E is for ebony. Hint hint!", {Tags.RING}, RingTypes.EBONY),
+            SpawnRing("Ivory Ring", "This is a ivory ring. I is for ivory. Hint hint!", {Tags.RING}, RingTypes.IVORY),
+            SpawnRing("Silver Ring", "This is a silver ring. S is for silver. Hint hint!", {Tags.RING}, RingTypes.SILVER)
         }
 
-    Private Function SpawnRing(itemName As String, itemDescription As String, itemTags() As String) As LocationInitializer
-        Return Sub(location) location.Inventory.CreateItem(CreateItem(itemName, itemDescription, itemTags))
+    Private Function SpawnRing(itemName As String, itemDescription As String, itemTags() As String, ringType As String) As LocationInitializer
+        Return Sub(location) location.Inventory.CreateItem(CreateItem(itemName, itemDescription, itemTags, ringType))
     End Function
 
-    Private Function CreateItem(itemName As String, itemDescription As String, itemTags() As String) As ItemInitializer
+    Private Function CreateItem(itemName As String, itemDescription As String, itemTags() As String, ringType As String) As ItemInitializer
         Return Sub(item)
                    item.SetName(itemName)
                    item.SetDescription(itemDescription)
                    For Each itemTag In itemTags
                        item.SetTag(itemTag)
                    Next
+                   item.SetRingType(ringType)
                End Sub
     End Function
 
-    Private Sub PopulateGraveyard(graveyardLocations As IEnumerable(Of ILocation), context As IInitializationContext)
+    Private Function PopulateGraveyard(graveyardLocations As IEnumerable(Of ILocation), context As IInitializationContext) As String
         Dim deadEnds As New Queue(Of ILocation)(graveyardLocations.Where(Function(x) x.Routes.Count = 1).OrderByDescending(Function(x) x.GetCounter(Counters.DEPTH)))
         For Each ringSpawner In ringSpawners
             ringSpawner.Invoke(deadEnds.Dequeue)
         Next
-        PopulateClues(graveyardLocations, context)
-    End Sub
+        Return PopulateClues(graveyardLocations, context)
+    End Function
 
-    Private Sub PopulateClues(graveyardLocations As IEnumerable(Of ILocation), context As IInitializationContext)
-        Dim ringTags As New HashSet(Of String)(Grimoire.RING_TAGS)
+    Private Function PopulateClues(graveyardLocations As IEnumerable(Of ILocation), context As IInitializationContext) As String
+        Dim ringTypes As New HashSet(Of String)(Processing.RingTypes.ALL)
         Dim clues As New List(Of String)
+        Dim result As String = ""
         For Each alcoveNumber In Enumerable.Range(1, ALCOVE_COUNT)
-            Dim alcoveTag = context.AlcoveTags.Dequeue
-            ringTags.Remove(alcoveTag)
+            Dim alcoveRingType = context.AlcoveTags.Dequeue
+            ringTypes.Remove(alcoveRingType)
+            Dim letter = alcoveRingType.First
+            result = result & letter
             For Each guess In Enumerable.Range(1, ALCOVE_COUNT)
                 If guess = alcoveNumber Then
                     Continue For
                 End If
-                clues.Add($"{alcoveTag.First} is not in the {GetOrdinal(guess)} position.")
+                clues.Add($"{letter} is not in the {GetOrdinal(guess)} position.")
             Next
         Next
-        For Each ringTag In ringTags
+        For Each ringTag In ringTypes
             For Each alcoveNumber In Enumerable.Range(1, ALCOVE_COUNT)
                 clues.Add($"{ringTag.First} is not in the {GetOrdinal(alcoveNumber)} position.")
             Next
@@ -77,7 +81,8 @@ Friend Module GraveyardInitializer
         For Each clueNumber In Enumerable.Range(1, clues.Count)
             locationQueue.Dequeue().CreateFeature(CreateClue(clueNumber, clueQueue.Dequeue))
         Next
-    End Sub
+        Return result
+    End Function
 
     Private Function CreateClue(clueNumber As Integer, clueText As String) As FeatureInitializer
         Return Sub(feature)
