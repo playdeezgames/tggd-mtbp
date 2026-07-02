@@ -25,11 +25,13 @@ Friend Module ChurchInitializer
     Private Sub InitializeHangSelf(verb As IVerb)
         verb.SetName("Hang Self")
         verb.SetDescription("Listen. I'm not telling what to do. I'm just saying that options are available.")
+        verb.SetVerbType(VerbTypes.HANG_SELF)
     End Sub
 
     Private Sub InitializePullRope(verb As IVerb)
         verb.SetName("Pull Rope")
         verb.SetDescription("Anything could happen! Most likely a bell will ring. But who knows?")
+        verb.SetVerbType(VerbTypes.PULL_ROPE)
     End Sub
 
     Private Function CreateAlcoves(location As ILocation) As Queue(Of String)

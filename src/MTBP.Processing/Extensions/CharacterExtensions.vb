@@ -1,6 +1,7 @@
 ﻿Imports System.Runtime.CompilerServices
 Imports MTBP.Persistence
 Friend Delegate Function CharacterFeatureItemHandler(character As ICharacter, feature As IFeature, item As IItem) As Boolean
+Friend Delegate Function CharacterFeatureVerbHandler(character As ICharacter, feature As IFeature, verb As IVerb) As Boolean
 Friend Module CharacterExtensions
     <Extension>
     Friend Function IsAvatar(character As ICharacter) As Boolean
@@ -131,8 +132,37 @@ Friend Module CharacterExtensions
     Friend Sub Kill(character As ICharacter)
         character.SetCounter(Counters.HEALTH, character.GetCounterMinimum(Counters.HEALTH))
     End Sub
+
+    Private ReadOnly featureVerbHandlers As IEnumerable(Of CharacterFeatureVerbHandler) =
+        {
+            AddressOf PullRope,
+            AddressOf HangSelf
+        }
+
+    Private Function PullRope(character As ICharacter, feature As IFeature, verb As IVerb) As Boolean
+        If Not verb.GetVerbType() = VerbTypes.PULL_ROPE Then
+            Return False
+        End If
+        character.AddMessage($"{character.GetName} pulls the rope, and the bell chimes.")
+        Return True
+    End Function
+
+    Private Function HangSelf(character As ICharacter, feature As IFeature, verb As IVerb) As Boolean
+        If Not verb.GetVerbType() = VerbTypes.HANG_SELF Then
+            Return False
+        End If
+        character.AddMessage($"{character.GetName} wraps the rope a number of times around his neck, and jumps off of the altar. Instead of cleanly breaking his neck, he asphyxiates himself over the next several minutes, as the bell chimes.")
+        character.Kill()
+        Return True
+    End Function
+
     <Extension>
     Friend Sub PerformFeatureVerb(character As ICharacter, feature As IFeature, verb As IVerb)
+        For Each handler In featureVerbHandlers
+            If handler.Invoke(character, feature, verb) Then
+                Return
+            End If
+        Next
         character.AddMessage($"Nothing happens!")
     End Sub
 End Module
