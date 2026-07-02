@@ -4,4 +4,5 @@ Public Interface IFeature
     ReadOnly Property FeatureId As Guid
     ReadOnly Property Location As ILocation
     Function CreateVerb(Optional initializer As VerbInitializer = Nothing) As IVerb
+    ReadOnly Property Verbs As IEnumerable(Of IVerb)
 End Interface

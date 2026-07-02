@@ -38,5 +38,11 @@ Friend Class FeatureModel
         End Get
     End Property
 
+    Public ReadOnly Property Verbs As IEnumerable(Of IVerbModel) Implements IFeatureModel.Verbs
+        Get
+            Return feature.Verbs.Select(AddressOf VerbModel.Create)
+        End Get
+    End Property
+
     Friend ReadOnly feature As IFeature
 End Class

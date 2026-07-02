@@ -17,6 +17,12 @@ Friend Class Feature
         End Get
     End Property
 
+    Public ReadOnly Property Verbs As IEnumerable(Of IVerb) Implements IFeature.Verbs
+        Get
+            Return Data.VerbIds.Select(Function(x) Verb.Create(World, _data, x))
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property Data As FeatureData
         Get
             Return _data.Features(FeatureId)
@@ -30,6 +36,7 @@ Friend Class Feature
     Public Function CreateVerb(Optional initializer As VerbInitializer = Nothing) As IVerb Implements IFeature.CreateVerb
         Dim verbId = Guid.NewGuid
         _data.Verbs(verbId) = New VerbData
+        Data.VerbIds.Add(verbId)
         Dim result As IVerb = Verb.Create(World, _data, verbId)
         initializer?.Invoke(result)
         Return result

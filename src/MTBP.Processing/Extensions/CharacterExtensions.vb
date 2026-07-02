@@ -131,4 +131,8 @@ Friend Module CharacterExtensions
     Friend Sub Kill(character As ICharacter)
         character.SetCounter(Counters.HEALTH, character.GetCounterMinimum(Counters.HEALTH))
     End Sub
+    <Extension>
+    Friend Sub PerformFeatureVerb(character As ICharacter, feature As IFeature, verb As IVerb)
+        character.AddMessage($"Nothing happens!")
+    End Sub
 End Module

@@ -16,9 +16,20 @@ Friend Class FeatureMenu
             Return Enumerable.Empty(Of LaunchDelegate).
                 Append(AddressOf ChooseNeverMind).
                 Append(AddressOf ChoosePlaceItem).
-                Append(AddressOf ChooseTakeItem)
+                Append(AddressOf ChooseTakeItem).
+                Concat(CreateVerbChoices())
         End Get
     End Property
+
+    Private Function CreateVerbChoices() As IEnumerable(Of LaunchDelegate)
+        Return FeatureModel.Verbs.Select(Function(x) CreateVerbChoice(x))
+    End Function
+
+    Private Function CreateVerbChoice(verbModel As IVerbModel) As LaunchDelegate
+        Return Function(c, m, e)
+                   Return DialogChoice.Create(True, verbModel.Text, FeatureVerbActivity.Launch(c, m, e, FeatureModel, verbModel))
+               End Function
+    End Function
 
     Private Function ChooseTakeItem(
                                    context As IDisplayContext,
